@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Donate – Hope Family Care Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=Montserrat:wght@700;800&family=Nunito:wght@800;900&family=Barlow+Condensed:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sage:    #7a9e7e;
+      --sage-lt: #d4e6d5;
+      --sage-dk: #4f7153;
+      --cream:   #fdf8f1;
+      --warm:    #f4ede0;
+      --gold:    #c9913d;
+      --gold-lt: #f2d9a8;
+      --terra:   #b05c3b;
+      --navy:    #1e3448;
+      --text:    #2c2c2c;
+      --muted:   #6b7280;
+      --white:   #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(253,248,241,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(201,145,61,0.18);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 1.5rem;
+      height: 100px;
+    }
+
+    .nav-logo {
+      display: flex; align-items: center; text-decoration: none;
+    }
+    .nav-logo-img {
+      height: 92px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 0.25rem; list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none; color: var(--navy);
+      font-size: 0.875rem; font-weight: 500;
+      padding: 0.5rem 0.85rem; border-radius: 6px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-links a:hover { background: var(--sage-lt); color: var(--sage-dk); }
+    .nav-links .btn-nav {
+      background: var(--sage); color: white; border-radius: 8px;
+      padding: 0.5rem 1.1rem;
+    }
+    .nav-links .btn-nav:hover { background: var(--sage-dk); color: white; }
+    .nav-links .btn-donate {
+      background: #c0392b; color: white !important; border-radius: 8px;
+      padding: 0.5rem 1.1rem; font-weight: 600;
+    }
+    .nav-links .btn-donate:hover { background: #a93226 !important; color: white !important; }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--navy); border-radius: 2px; transition: all 0.3s; }
+
+    /* ── LAYOUT ── */
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 2rem; }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      padding-top: 100px;
+      background: linear-gradient(135deg, var(--navy) 0%, #2d4f6a 100%);
+      color: white;
+      text-align: center;
+      padding-bottom: 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='10'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .page-hero-inner {
+      position: relative; z-index: 1;
+      padding-top: 4rem;
+    }
+    .page-hero .eyebrow {
+      display: inline-block;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--gold-lt);
+      margin-bottom: 1.2rem;
+    }
+    .page-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 700; line-height: 1.15;
+      margin-bottom: 1.4rem;
+    }
+    .page-hero p {
+      font-size: 1.1rem; color: rgba(255,255,255,0.82);
+      max-width: 560px; margin: 0 auto;
+    }
+
+    /* ── IMPACT STATS ── */
+    .impact-section {
+      background: var(--warm);
+      padding: 4rem 0;
+    }
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      text-align: center;
+    }
+    .impact-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    }
+    .impact-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem; font-weight: 700;
+      color: var(--sage-dk);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .impact-label {
+      font-size: 0.875rem; color: var(--muted);
+      font-weight: 500; line-height: 1.4;
+    }
+
+    /* ── DONATE SECTION ── */
+    .donate-section {
+      padding: 5rem 0;
+    }
+    .donate-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .donate-copy h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700; line-height: 1.2;
+      color: var(--navy);
+      margin-bottom: 1.25rem;
+    }
+    .donate-copy p {
+      color: var(--muted); font-size: 1rem; line-height: 1.75;
+      margin-bottom: 1rem;
+    }
+
+    .donate-copy .feature-list {
+      list-style: none; margin-top: 1.5rem;
+    }
+    .donate-copy .feature-list li {
+      display: flex; align-items: flex-start; gap: 0.75rem;
+      margin-bottom: 0.9rem; font-size: 0.95rem; color: var(--text);
+    }
+    .donate-copy .feature-list li .check {
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      background: var(--sage-lt); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--sage-dk); font-size: 0.7rem; font-weight: 700;
+      margin-top: 1px;
+    }
+
+    /* ── DONATION FORM CARD ── */
+    .donate-card {
+      background: white;
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 4px 40px rgba(0,0,0,0.1);
+    }
+    .donate-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.4rem;
+    }
+    .donate-card .card-sub {
+      font-size: 0.875rem; color: var(--muted);
+      margin-bottom: 1.75rem;
+    }
+
+    .amount-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.6rem;
+      margin-bottom: 0.75rem;
+    }
+    .amount-btn {
+      border: 2px solid var(--sage-lt);
+      background: white;
+      border-radius: 10px;
+      padding: 0.75rem 0.5rem;
+      font-size: 1.1rem; font-weight: 600;
+      color: var(--navy);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .amount-btn:hover, .amount-btn.active {
+      background: var(--sage); border-color: var(--sage);
+      color: white;
+    }
+    .amount-btn.monthly-label {
+      font-size: 0.75rem;
+    }
+
+    .custom-amount {
+      position: relative; margin-bottom: 1.5rem;
+    }
+    .custom-amount .dollar {
+      position: absolute; left: 1rem; top: 50%; transform: translateY(-50%);
+      font-weight: 600; color: var(--muted);
+    }
+    .custom-amount input {
+      width: 100%; border: 2px solid var(--sage-lt);
+      border-radius: 10px; padding: 0.8rem 1rem 0.8rem 1.75rem;
+      font-size: 1rem; font-family: 'DM Sans', sans-serif;
+      color: var(--navy); outline: none;
+      transition: border-color 0.2s;
+    }
+    .custom-amount input:focus { border-color: var(--sage); }
+    .custom-amount input::placeholder { color: #bbb; }
+
+    .frequency-tabs {
+      display: flex; gap: 0.5rem; margin-bottom: 1.5rem;
+    }
+    .freq-tab {
+      flex: 1; padding: 0.6rem; border-radius: 8px;
+      border: 2px solid var(--sage-lt); background: white;
+      font-size: 0.875rem; font-weight: 500; cursor: pointer;
+      transition: all 0.2s; font-family: 'DM Sans', sans-serif;
+      color: var(--navy);
+    }
+    .freq-tab:hover, .freq-tab.active {
+      background: var(--navy); border-color: var(--navy); color: white;
+    }
+
+    .donate-submit {
+      width: 100%;
+      background: #c0392b;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 1rem;
+      font-size: 1.05rem; font-weight: 600;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: background 0.2s, transform 0.1s;
+      margin-bottom: 1rem;
+    }
+    .donate-submit:hover { background: #a93226; transform: translateY(-1px); }
+    .donate-submit:active { transform: translateY(0); }
+
+    .secure-note {
+      display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+      font-size: 0.78rem; color: var(--muted);
+    }
+    .secure-note svg { flex-shrink: 0; }
+
+    /* ── HOW IT HELPS ── */
+    .how-section {
+      background: var(--navy);
+      color: white;
+      padding: 5rem 0;
+    }
+    .how-section .section-eyebrow {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--gold-lt);
+      margin-bottom: 0.75rem;
+    }
+    .how-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700; line-height: 1.2;
+      margin-bottom: 3rem;
+    }
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+    .how-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 2rem;
+    }
+    .how-card .icon {
+      font-size: 2rem; margin-bottom: 1rem;
+    }
+    .how-card h4 {
+      font-size: 1.05rem; font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .how-card p {
+      font-size: 0.875rem; color: rgba(255,255,255,0.7);
+      line-height: 1.65;
+    }
+
+    /* ── QUOTE ── */
+    .quote-section {
+      padding: 5rem 0;
+      background: var(--cream);
+      text-align: center;
+    }
+    .quote-section blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.4rem, 3vw, 2.1rem);
+      font-style: italic;
+      color: var(--navy);
+      max-width: 700px; margin: 0 auto 1.5rem;
+      line-height: 1.5;
+    }
+    .quote-section cite {
+      font-size: 0.875rem; color: var(--muted);
+      font-style: normal; font-weight: 500;
+    }
+
+    /* ── CONTACT SECTION ── */
+    #contact { background: var(--sage); color: white; text-align: center; padding: 6rem 0; }
+    #contact .section-title { color: white; margin: 0 auto 1rem; }
+    #contact .section-sub { color: rgba(255,255,255,0.8); margin: 0 auto 2.5rem; }
+    .contact-info { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin-top: 2rem; }
+    .contact-item { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; }
+    .contact-item .ci-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.7; }
+    .contact-item .ci-val { font-size: 1.05rem; font-weight: 600; }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700; line-height: 1.2;
+      max-width: 560px;
+    }
+    .section-sub { font-size: 1rem; line-height: 1.75; max-width: 480px; }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--sage-dk); color: white; text-decoration: none;
+      padding: 0.875rem 2rem; border-radius: 10px;
+      font-size: 0.95rem; font-weight: 600;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--sage); transform: translateY(-2px); }
+
+    footer {
+      background: var(--navy); color: rgba(255,255,255,0.65);
+      text-align: center; padding: 2rem 0; font-size: 0.85rem;
+    }
+    footer strong { color: rgba(255,255,255,0.85); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      .nav-links { display: none; flex-direction: column; position: fixed; top: 100px; left: 0; right: 0; background: var(--cream); padding: 1.5rem; gap: 0.5rem; border-bottom: 1px solid var(--sage-lt); }
+      .nav-links.open { display: flex; }
+      .donate-grid { grid-template-columns: 1fr; }
+      .amount-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+<a href="index.html" class="nav-logo" style="display:flex;align-items:center;gap:10px;text-decoration:none;"><img src="data:image/gif;base64,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" alt="Hope Family Care Center" class="nav-logo-img" /><div style="line-height:1.1;"><div style="font-family:'Montserrat','Poppins',sans-serif;font-weight:800;font-size:3.3rem;color:#1a3a8f;letter-spacing:0.04em;">hope</div><div style="font-family:'Montserrat','Poppins',sans-serif;font-weight:800;font-size:0.95rem;color:#c0392b;letter-spacing:0.12em;margin-top:0.2rem;">FAMILY CARE CENTER</div></div></a>
+
+  <div class="hamburger" id="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="services.html">Patient Services</a></li>
+    <li><a href="#portal">Patient Portal</a></li>
+    <li><a href="#portal">Pay My Bill</a></li>
+    <li><a href="#resources">Resources</a></li>
+    <li><a href="#contact" class="btn-nav">Contact Us</a></li>
+    <li><a href="donate.html" class="btn-donate">Donate Now</a></li>
+  </ul>
+</nav>
+
+<!-- ── PAGE HERO ── -->
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-inner">
+      <span class="eyebrow">Support Our Mission</span>
+      <h1>Your Gift Brings<br/>Health &amp; Hope</h1>
+      <p>Help us provide quality, compassionate care to Kansas City families — regardless of their ability to pay.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── IMPACT STATS ── -->
+<section class="impact-section">
+  <div class="container">
+    <div class="impact-grid">
+      <div class="impact-card">
+        <div class="impact-number">15,000+</div>
+        <div class="impact-label">Patients served<br/>each year</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-number">50+</div>
+        <div class="impact-label">Zip codes served<br/>across Kansas City</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-number">30+</div>
+        <div class="impact-label">Years of serving<br/>our community</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-number">$0</div>
+        <div class="impact-label">Cost to patients<br/>who cannot afford care</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DONATE SECTION ── -->
+<section class="donate-section">
+  <div class="container">
+    <div class="donate-grid">
+
+      <!-- Copy -->
+      <div class="donate-copy">
+        <h2>Why Your Support Matters</h2>
+        <p>
+          Hope Family Care Center has been a cornerstone of health in Kansas City for decades. We serve patients who are uninsured, underinsured, and underserved — offering primary care, behavioral health, women's health, and more.
+        </p>
+        <p>
+          Your donation helps ensure that cost is never a barrier to getting the care a family needs.
+        </p>
+        <ul class="feature-list">
+          <li>
+            <span class="check">✓</span>
+            <span><strong>$25</strong> covers a well-child visit for a child with no insurance</span>
+          </li>
+          <li>
+            <span class="check">✓</span>
+            <span><strong>$50</strong> provides diabetes management support for an uninsured adult</span>
+          </li>
+          <li>
+            <span class="check">✓</span>
+            <span><strong>$100</strong> funds a behavioral health session for a family in crisis</span>
+          </li>
+          <li>
+            <span class="check">✓</span>
+            <span><strong>Monthly gifts</strong> create lasting, sustained impact in our community</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Donation Card -->
+      <div class="donate-card">
+        <h3>Make a Donation</h3>
+        <p class="card-sub">Every dollar goes directly to patient care.</p>
+
+        <div class="frequency-tabs">
+          <button class="freq-tab active" onclick="setFreq(this, 'one-time')">One-Time</button>
+          <button class="freq-tab" onclick="setFreq(this, 'monthly')">Monthly</button>
+        </div>
+
+        <div class="amount-grid" id="amountGrid">
+          <button class="amount-btn" onclick="selectAmount(this, 25)">$25</button>
+          <button class="amount-btn active" onclick="selectAmount(this, 50)">$50</button>
+          <button class="amount-btn" onclick="selectAmount(this, 100)">$100</button>
+          <button class="amount-btn" onclick="selectAmount(this, 250)">$250</button>
+          <button class="amount-btn" onclick="selectAmount(this, 500)">$500</button>
+          <button class="amount-btn" onclick="selectAmount(this, null)">Other</button>
+        </div>
+
+        <div class="custom-amount" id="customAmountWrap" style="display:none;">
+          <span class="dollar">$</span>
+          <input type="number" id="customAmount" placeholder="Enter amount" min="1" />
+        </div>
+
+        <button class="donate-submit" id="donateBtn" onclick="handleDonate()">
+          Donate $50 Now
+        </button>
+
+        <div class="secure-note">
+          <svg width="14" height="16" viewBox="0 0 14 16" fill="none">
+            <path d="M7 1L1 3.5V8c0 3.31 2.56 6.41 6 7 3.44-.59 6-3.69 6-7V3.5L7 1z" fill="none" stroke="#6b7280" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M4.5 8l1.5 1.5L9 6" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Secure, encrypted donation
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT HELPS ── -->
+<section class="how-section">
+  <div class="container">
+    <div class="section-eyebrow">Your Impact</div>
+    <h2>Where Your Gift Goes</h2>
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="icon">🩺</div>
+        <h4>Primary Care</h4>
+        <p>Preventive checkups, chronic disease management, and urgent care for adults and children — regardless of insurance status.</p>
+      </div>
+      <div class="how-card">
+        <div class="icon">🧠</div>
+        <h4>Behavioral Health</h4>
+        <p>Mental health counseling, substance use support, and crisis intervention for individuals and families in need.</p>
+      </div>
+      <div class="how-card">
+        <div class="icon">👶</div>
+        <h4>Women &amp; Children</h4>
+        <p>Prenatal care, well-child visits, and women's health services that keep Kansas City families healthy from the start.</p>
+      </div>
+      <div class="how-card">
+        <div class="icon">💊</div>
+        <h4>Pharmacy &amp; Medications</h4>
+        <p>Affordable prescription access so patients can afford the medications their doctors prescribe.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── QUOTE ── -->
+<section class="quote-section">
+  <div class="container">
+    <blockquote>
+      "Hope Family Care Center gave my family somewhere to turn when we had no one else. Their care changed our lives."
+    </blockquote>
+    <cite>— A Hope Family Care Center Patient</cite>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="container">
+    <div class="section-label" style="justify-content:center; color:rgba(255,255,255,0.7); display:flex; align-items:center; gap:0.5rem; margin-bottom:0.75rem;">
+      <span style="display:block; width:2rem; height:1px; background:currentColor;"></span>
+      Questions About Giving
+      <span style="display:block; width:2rem; height:1px; background:currentColor;"></span>
+    </div>
+    <h2 class="section-title" style="max-width:none; margin:0 auto 1rem;">We'd Love to Hear From You</h2>
+    <p class="section-sub" style="max-width:none; margin:0 auto 2rem;">
+      Have questions about donating, or interested in making a larger contribution or gift? Reach out to our team.
+    </p>
+    <a href="tel:+18168616500" class="btn-primary" style="background:white; color:var(--sage-dk); box-shadow:0 4px 20px rgba(0,0,0,0.15); margin-bottom:1rem; display:inline-flex;">
+      Call Us Today
+    </a>
+    <div class="contact-info">
+      <div class="contact-item">
+        <span class="ci-label">Phone</span>
+        <span class="ci-val">(816) 861-6500</span>
+      </div>
+      <div class="contact-item">
+        <span class="ci-label">Location</span>
+        <span class="ci-val">3027 Prospect Avenue, Kansas City MO 64128</span>
+      </div>
+      <div class="contact-item">
+        <span class="ci-label">Hours</span>
+        <span class="ci-val">Mon – Fri, 8am – 5pm</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="container">
+    <p><strong>Hope Family Care Center</strong> &bull; Kansas City, Missouri &bull; Serving Kansas City Area Families</p>
+    <p style="margin-top:0.5rem;">&copy; 2024 Hope Family Care Center. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  let selectedAmount = 50;
+  let isMonthly = false;
+
+  function setFreq(btn, type) {
+    document.querySelectorAll('.freq-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    isMonthly = (type === 'monthly');
+    updateBtn();
+  }
+
+  function selectAmount(btn, amount) {
+    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    if (amount === null) {
+      document.getElementById('customAmountWrap').style.display = 'block';
+      document.getElementById('customAmount').focus();
+      selectedAmount = null;
+    } else {
+      document.getElementById('customAmountWrap').style.display = 'none';
+      selectedAmount = amount;
+    }
+    updateBtn();
+  }
+
+  document.getElementById('customAmount').addEventListener('input', function() {
+    selectedAmount = parseFloat(this.value) || null;
+    updateBtn();
+  });
+
+  function updateBtn() {
+    const btn = document.getElementById('donateBtn');
+    const amt = selectedAmount ? ('$' + selectedAmount) : 'Now';
+    const freq = isMonthly ? '/month' : '';
+    btn.textContent = selectedAmount ? ('Donate ' + amt + freq) : 'Donate Now';
+  }
+
+  function handleDonate() {
+    const amount = selectedAmount || parseFloat(document.getElementById('customAmount').value);
+    if (!amount || amount < 1) {
+      alert('Please enter a donation amount.');
+      return;
+    }
+    // In production, redirect to payment processor
+    alert('Thank you for your generosity! You\'re being redirected to our secure payment page.');
+  }
+</script>
+
+</body>
+</html>

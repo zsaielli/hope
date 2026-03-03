@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Services — Hope Family Care Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --amber:        #F0871A;
+      --amber-dark:   #C8680A;
+      --amber-light:  #FDE8C4;
+      --red:          #9B2020;
+      --green:        #2A7A2A;
+      --blue:         #1E4FA3;
+      --purple:       #4A2D7A;
+      --cream:        #FDF8F0;
+      --cream-dark:   #F2E8D8;
+      --charcoal:     #1A1A1A;
+      --charcoal-mid: #282828;
+      --text-body:    #4A3F35;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: var(--cream);
+      color: var(--text-body);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; }
+
+    /* ─── GRAIN ─────────────────────────────────── */
+    .grain { position: relative; }
+    .grain::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      pointer-events: none;
+      mix-blend-mode: overlay;
+      z-index: 10;
+    }
+
+    /* ─── NAV ────────────────────────────────────── */
+    #main-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      padding: 14px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(26, 26, 26, 0.96);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: padding 0.4s ease;
+    }
+    .nav-logo { height: 48px; }
+    .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+    .nav-links a {
+      font-size: 12.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(255,255,255,0.78); text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .nav-links a:hover { color: var(--amber); }
+    .nav-links a.active { color: var(--amber); }
+    .nav-links a:focus-visible { outline: 2px solid var(--amber); outline-offset: 4px; border-radius: 2px; }
+    .nav-cta {
+      background: var(--amber) !important;
+      color: #fff !important;
+      padding: 10px 22px; border-radius: 5px;
+      font-weight: 800 !important;
+      box-shadow: 0 2px 12px rgba(240,135,26,0.35);
+      transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease !important;
+    }
+    .nav-cta:hover {
+      background: var(--amber-dark) !important; transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(240,135,26,0.45) !important;
+    }
+    .nav-cta:active { transform: translateY(0) !important; }
+
+    .nav-phone {
+      display: inline-flex; align-items: center; gap: 7px;
+      color: rgba(255,255,255,0.82) !important;
+      font-size: 13px !important; font-weight: 700 !important;
+      letter-spacing: 0.04em !important; text-transform: none !important;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .nav-phone:hover { color: var(--amber) !important; }
+    .nav-phone svg { flex-shrink: 0; }
+
+    .nav-donate {
+      background: var(--red) !important;
+      color: #fff !important;
+      padding: 10px 22px; border-radius: 5px;
+      font-weight: 800 !important;
+      letter-spacing: 0.08em !important;
+      box-shadow: 0 2px 12px rgba(155,32,32,0.35);
+      transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease !important;
+    }
+    .nav-donate:hover {
+      background: #7A1818 !important; transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(155,32,32,0.45) !important;
+    }
+    .nav-donate:active { transform: translateY(0) !important; }
+
+    /* ─── PAGE HERO ──────────────────────────────── */
+    .page-hero {
+      position: relative;
+      padding: 160px 80px 100px;
+      background: var(--charcoal);
+      overflow: hidden;
+      text-align: center;
+    }
+    .page-hero-arc {
+      position: absolute; right: -100px; bottom: -100px;
+      width: 600px; height: 600px;
+      opacity: 0.08; pointer-events: none;
+    }
+    .page-hero-arc2 {
+      position: absolute; left: -160px; top: -160px;
+      width: 500px; height: 500px;
+      opacity: 0.05; pointer-events: none;
+    }
+    .page-hero-inner {
+      max-width: 780px; margin: 0 auto;
+      position: relative; z-index: 1;
+    }
+    .hero-eyebrow {
+      font-family: 'Nunito', sans-serif;
+      font-size: 11.5px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 18px;
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+    }
+    .hero-eyebrow::before, .hero-eyebrow::after {
+      content: ''; display: inline-block; width: 44px; height: 2px;
+      background: linear-gradient(to right, var(--amber), var(--amber-dark));
+    }
+    .page-hero h1 {
+      font-size: clamp(48px, 7vw, 88px);
+      font-weight: 300; line-height: 0.98;
+      color: #fff; letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+    .page-hero h1 strong {
+      display: block; font-weight: 700; color: var(--amber);
+    }
+    .page-hero-desc {
+      font-size: 17px; line-height: 1.78;
+      color: rgba(255,255,255,0.62);
+      max-width: 580px; margin: 0 auto;
+    }
+
+    /* ─── ARC STRIPE ─────────────────────────────── */
+    .arc-stripe { display: flex; height: 7px; }
+    .arc-stripe span { flex: 1; }
+
+    /* ─── SHARED LAYOUT ──────────────────────────── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 80px; }
+
+    .section-eyebrow {
+      font-family: 'Nunito', sans-serif;
+      font-size: 11px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 18px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .section-eyebrow::before {
+      content: ''; width: 32px; height: 2px;
+      background: var(--amber); display: inline-block;
+    }
+    .section-title {
+      font-size: clamp(34px, 4.5vw, 52px);
+      font-weight: 600; line-height: 1.1;
+      color: var(--charcoal); letter-spacing: -0.025em;
+      margin-bottom: 16px;
+    }
+    .section-title em { font-style: italic; color: var(--amber-dark); }
+    .section-subtitle {
+      font-size: 17px; line-height: 1.78;
+      color: var(--text-body); max-width: 580px;
+      margin-bottom: 56px;
+    }
+
+    /* ─── SERVICES SECTION ───────────────────────── */
+    .section-services {
+      background: var(--cream);
+      padding: 100px 0;
+    }
+    .services-header { margin-bottom: 52px; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    /* ─── SERVICE CARD ───────────────────────────── */
+    .svc-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 32px 28px;
+      border: 1.5px solid rgba(74,63,53,0.09);
+      cursor: pointer;
+      display: flex; flex-direction: column;
+      box-shadow: 0 2px 18px rgba(26,26,26,0.05), 0 1px 4px rgba(26,26,26,0.04);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    .svc-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(240,135,26,0.22);
+    }
+    .svc-card:hover .svc-icon-wrap {
+      transform: scale(1.06);
+    }
+    .svc-card:focus-visible {
+      outline: 2px solid var(--amber); outline-offset: 3px;
+    }
+    .svc-icon-wrap {
+      width: 56px; height: 56px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px; flex-shrink: 0;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .svc-icon-wrap svg { width: 26px; height: 26px; }
+    .svc-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px; font-weight: 700;
+      color: var(--charcoal); margin-bottom: 10px; line-height: 1.2;
+    }
+    .svc-card p {
+      font-size: 14.5px; line-height: 1.72;
+      color: #6B7280; flex: 1; margin: 0;
+    }
+    .svc-card-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 20px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 12px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--amber-dark);
+      transition: gap 0.2s ease;
+    }
+    .svc-card:hover .svc-card-link { gap: 10px; }
+    .svc-card-link::after {
+      content: '→'; font-size: 14px; font-family: sans-serif;
+    }
+
+    /* ─── MODAL ──────────────────────────────────── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 900;
+      background: rgba(26,26,26,0.85);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      align-items: center; justify-content: center;
+      padding: 2rem;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal-box {
+      background: var(--cream);
+      border-radius: 20px;
+      max-width: 640px; width: 100%;
+      padding: 40px 44px;
+      position: relative;
+      max-height: 88vh; overflow-y: auto;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.18);
+      animation: modal-in 0.38s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+    @keyframes modal-in {
+      from { opacity: 0; transform: translateY(28px) scale(0.96); }
+      to   { opacity: 1; transform: translateY(0)   scale(1);    }
+    }
+    .modal-close {
+      position: absolute; top: 18px; right: 18px;
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--cream-dark); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; color: var(--charcoal);
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .modal-close:hover { background: var(--amber-light); transform: scale(1.08); }
+    .modal-close:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+
+    .modal-icon {
+      width: 64px; height: 64px; border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+    }
+    .modal-icon svg { width: 30px; height: 30px; }
+    .modal-box h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 4vw, 38px); font-weight: 700;
+      color: var(--charcoal); margin-bottom: 8px; line-height: 1.1;
+    }
+    .modal-tagline {
+      font-family: 'Nunito', sans-serif;
+      font-size: 13.5px; font-weight: 700; letter-spacing: 0.02em;
+      color: var(--amber-dark); margin-bottom: 20px;
+    }
+    .modal-divider {
+      height: 1px; background: rgba(74,63,53,0.12);
+      margin-bottom: 22px;
+    }
+    .modal-body {
+      font-size: 16px; line-height: 1.78;
+      color: var(--text-body); margin-bottom: 24px;
+    }
+    .modal-features {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-bottom: 32px;
+    }
+    .modal-feature {
+      background: var(--amber-light);
+      color: var(--amber-dark);
+      padding: 5px 14px; border-radius: 20px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 12px; font-weight: 700;
+    }
+    .modal-cta {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--amber); color: #fff;
+      padding: 15px 32px; border-radius: 5px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px; font-weight: 800; letter-spacing: 0.05em;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(240,135,26,0.35);
+      transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .modal-cta:hover {
+      background: var(--amber-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(240,135,26,0.45);
+    }
+    .modal-cta:active { transform: translateY(0); }
+    .modal-cta:focus-visible { outline: 2px solid var(--amber-dark); outline-offset: 3px; }
+
+    /* ─── CTA SECTION ────────────────────────────── */
+    .section-cta {
+      background: var(--amber);
+      padding: 100px 0;
+      position: relative; overflow: hidden;
+    }
+    .cta-arc {
+      position: absolute; right: -200px; top: 50%; transform: translateY(-50%);
+      width: 700px; height: 700px; opacity: 0.08; pointer-events: none;
+    }
+    .cta-inner { text-align: center; position: relative; z-index: 1; }
+    .cta-eyebrow {
+      font-family: 'Nunito', sans-serif;
+      font-size: 11px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(255,255,255,0.65); margin-bottom: 18px;
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+    }
+    .cta-eyebrow::before, .cta-eyebrow::after {
+      content: ''; width: 28px; height: 1px;
+      background: rgba(255,255,255,0.45); display: inline-block;
+    }
+    .cta-title {
+      font-size: clamp(38px, 6vw, 68px);
+      font-weight: 600; line-height: 1.05;
+      letter-spacing: -0.03em; color: #fff;
+      margin-bottom: 18px;
+    }
+    .cta-sub {
+      font-size: 17px; color: rgba(255,255,255,0.8);
+      line-height: 1.72; margin-bottom: 44px;
+      max-width: 600px; margin-left: auto; margin-right: auto;
+    }
+    .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-white {
+      background: #fff; color: var(--amber-dark);
+      padding: 17px 38px; border-radius: 5px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px; font-weight: 800; letter-spacing: 0.06em;
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 10px;
+      box-shadow: 0 4px 28px rgba(0,0,0,0.18);
+      transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .btn-white:hover {
+      background: var(--cream); transform: translateY(-2px);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.22);
+    }
+    .btn-white:active { transform: translateY(0); }
+    .btn-white:focus-visible { outline: 2px solid rgba(255,255,255,0.7); outline-offset: 3px; }
+
+    .btn-outline-white {
+      background: transparent; color: #fff;
+      padding: 17px 38px; border-radius: 5px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px; font-weight: 800; letter-spacing: 0.06em;
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 10px;
+      border: 2px solid rgba(255,255,255,0.55);
+      transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+    }
+    .btn-outline-white:hover {
+      border-color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.1);
+      transform: translateY(-2px);
+    }
+    .btn-outline-white:active { transform: translateY(0); }
+    .btn-outline-white:focus-visible { outline: 2px solid rgba(255,255,255,0.7); outline-offset: 3px; }
+
+    /* ─── INFO STRIP ─────────────────────────────── */
+    .info-strip { background: var(--charcoal-mid); padding: 64px 0; }
+    .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; }
+    .info-item { display: flex; align-items: flex-start; gap: 18px; }
+    .info-icon-box {
+      width: 46px; height: 46px; border-radius: 10px;
+      background: rgba(240,135,26,0.14);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; flex-shrink: 0;
+    }
+    .info-label {
+      font-family: 'Nunito', sans-serif;
+      font-size: 10px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 5px;
+    }
+    .info-value { font-size: 15px; color: rgba(255,255,255,0.72); line-height: 1.6; }
+
+    /* ─── FOOTER ─────────────────────────────────── */
+    .footer {
+      background: var(--charcoal);
+      padding: 72px 0 48px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    .footer-top {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding-bottom: 52px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      margin-bottom: 40px; gap: 48px;
+    }
+    .footer-brand { max-width: 280px; }
+    .footer-logo { height: 64px; margin-bottom: 14px; }
+    .footer-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px; font-style: italic;
+      color: rgba(255,255,255,0.4); line-height: 1.5;
+    }
+    .footer-nav-cols { display: flex; gap: 64px; }
+    .footer-col-head {
+      font-family: 'Nunito', sans-serif;
+      font-size: 10.5px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 18px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+    .footer-col a {
+      font-size: 14px; color: rgba(255,255,255,0.45); text-decoration: none;
+      font-family: 'Nunito', sans-serif;
+      transition: color 0.2s ease;
+    }
+    .footer-col a:hover { color: rgba(255,255,255,0.85); }
+    .footer-bottom {
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 16px;
+    }
+    .footer-copy { font-size: 12.5px; color: rgba(255,255,255,0.25); font-family: 'Nunito', sans-serif; }
+    .footer-dots { display: flex; gap: 6px; align-items: center; }
+    .footer-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+
+    /* ─── FADE-UP ─────────────────────────────────── */
+    .fade-up {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up.d1 { transition-delay: 0.08s; }
+    .fade-up.d2 { transition-delay: 0.16s; }
+    .fade-up.d3 { transition-delay: 0.24s; }
+    .fade-up.d4 { transition-delay: 0.32s; }
+    .fade-up.d5 { transition-delay: 0.40s; }
+    .fade-up.d6 { transition-delay: 0.48s; }
+    .fade-up.d7 { transition-delay: 0.56s; }
+    .fade-up.d8 { transition-delay: 0.64s; }
+
+    /* ─── RESPONSIVE ─────────────────────────────── */
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .container { padding: 0 28px; }
+      .page-hero { padding: 130px 28px 80px; }
+      .section-services, .section-cta, .info-strip, .footer { padding-top: 72px; padding-bottom: 72px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .info-grid { grid-template-columns: 1fr; gap: 28px; }
+      .footer-top { flex-direction: column; }
+      .footer-nav-cols { flex-direction: column; gap: 32px; }
+      .modal-box { padding: 28px 24px; }
+    }
+    @media (max-width: 480px) {
+      .cta-btns { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════
+       NAV
+  ══════════════════════════════════════════════ -->
+  <nav id="main-nav" aria-label="Main navigation">
+    <a href="index.html" aria-label="Hope Family Care Center home">
+      <img src="./assets/Logo1tp.gif" alt="Hope Family Care Center" class="nav-logo">
+    </a>
+    <ul class="nav-links">
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="services.html" class="active">Services</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+      <li><a href="tel:+18168616500" class="nav-phone" aria-label="Call us at (816) 861-6500"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 012 2.18 2 2 0 013.17 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>(816) 861-6500</a></li>
+      <li><a href="index.html#contact" class="nav-cta">Get Help Today</a></li>
+      <li><a href="donate.html" class="nav-donate">Donate</a></li>
+    </ul>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════
+       PAGE HERO
+  ══════════════════════════════════════════════ -->
+  <section class="page-hero grain" aria-label="Patient Services">
+    <svg class="page-hero-arc" viewBox="0 0 500 500" fill="none" aria-hidden="true">
+      <path d="M 480 480 Q 480 50 50 50" stroke="#F0871A" stroke-width="28" fill="none" stroke-linecap="round"/>
+      <path d="M 480 480 Q 480 100 100 100" stroke="#9B2020" stroke-width="24" fill="none" stroke-linecap="round"/>
+      <path d="M 480 480 Q 480 155 155 155" stroke="#2A7A2A" stroke-width="20" fill="none" stroke-linecap="round"/>
+      <path d="M 480 480 Q 480 210 210 210" stroke="#1E4FA3" stroke-width="17" fill="none" stroke-linecap="round"/>
+      <path d="M 480 480 Q 480 265 265 265" stroke="#4A2D7A" stroke-width="14" fill="none" stroke-linecap="round"/>
+    </svg>
+    <svg class="page-hero-arc2" viewBox="0 0 400 400" fill="none" aria-hidden="true">
+      <path d="M 20 380 Q 380 380 380 20" stroke="#F0871A" stroke-width="20" fill="none" stroke-linecap="round"/>
+      <path d="M 20 340 Q 340 340 340 20" stroke="#2A7A2A" stroke-width="14" fill="none" stroke-linecap="round"/>
+    </svg>
+
+    <div class="page-hero-inner">
+      <div class="hero-eyebrow fade-up">Hope Family Care Center</div>
+      <h1 class="fade-up d1">
+        Patient
+        <strong>Services</strong>
+      </h1>
+      <p class="page-hero-desc fade-up d2">
+        Whole-person care for every stage of life — from newborns to seniors, with compassion at the center of everything we do.
+      </p>
+    </div>
+  </section>
+
+  <!-- Arc stripe -->
+  <div class="arc-stripe" aria-hidden="true">
+    <span style="background:#F0871A;"></span>
+    <span style="background:#9B2020;"></span>
+    <span style="background:#2A7A2A;"></span>
+    <span style="background:#1E4FA3;"></span>
+    <span style="background:#4A2D7A;"></span>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SERVICES GRID
+  ══════════════════════════════════════════════ -->
+  <section class="section-services" id="services" aria-labelledby="services-heading">
+    <div class="container">
+      <div class="services-header">
+        <div class="section-eyebrow fade-up">Comprehensive Care</div>
+        <h2 class="section-title fade-up d1" id="services-heading">
+          Services built around <em>you</em>
+        </h2>
+        <p class="section-subtitle fade-up d2">
+          From routine care to complex needs, every service at Hope Family Care Center is delivered with compassion, quality, and dignity. Click any service to learn more.
+        </p>
+      </div>
+
+      <div class="services-grid">
+
+        <!-- 1. Primary Care -->
+        <div class="svc-card fade-up" role="button" tabindex="0" aria-label="Primary Care — Learn more" onclick="openModal('primary')" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('primary')">
+          <div class="svc-icon-wrap" style="background:rgba(42,122,42,0.12);">
+            <svg viewBox="0 0 24 24" stroke="#2A7A2A" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <h3>Primary Care</h3>
+          <p>Comprehensive health care for adults — from routine checkups and preventive care to managing ongoing health concerns.</p>
+          <span class="svc-card-link">Learn More</span>
+        </div>
+
+        <!-- 2. Pediatrics -->
+        <div class="svc-card fade-up d1" role="button" tabindex="0" aria-label="Pediatrics — Learn more" onclick="openModal('pediatrics')" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('pediatrics')">
+          <div class="svc-icon-wrap" style="background:rgba(240,135,26,0.12);">
+            <svg viewBox="0 0 24 24" stroke="#C8680A" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+          </div>
+          <h3>Pediatrics</h3>
+          <p>Caring, gentle medical care for children from birth through adolescence, including well-child visits, immunizations, and developmental screenings.</p>
+          <span class="svc-card-link">Learn More</span>
+        </div>
+
+        <!-- 3. Women's Health -->
+        <div class="svc-card fade-up d2" role="button" tabindex="0" aria-label="Women's Health — Learn more" onclick="openModal('womens')" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('womens')">
+          <div class="svc-icon-wrap" style="background:rgba(155,32,32,0.10);">
+            <svg viewBox="0 0 24 24" stroke="#9B2020" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M12 13v8M9 18h6"/></svg>
+          </div>
+          <h3>Women's Health</h3>
+          <p>Dedicated care for women at every stage of life — annual exams, family planning, prenatal guidance, and preventive screenings.</p>
+          <span class="svc-card-link">Learn More</span>
+        </div>
+
+        <!-- 4. Urgent Care -->
+        <div class="svc-card fade-up d3" role="button" tabindex="0" aria-label="Urgent Care — Learn more" onclick="openModal('urgent')" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('urgent')">
+          <div class="svc-icon-wrap" style="background:rgba(200,104,10,0.11);">
+            <svg viewBox="0 0 24 24" stroke="#C8680A" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <h3>Urgent Care</h3>
+          <p>Same-day care for non-emergency illnesses and injuries when you can't wait for a scheduled appointment.</p>
+          <span class="svc-card-link">Learn More</span>
+        </div>
+
+        <!-- 5. Dermatology -->
+        <div class="svc-card fade-up d4" role="button" tabindex="0" aria-label="Dermatology — Learn more" onclick="openModal('derm')" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('derm')">
+          <div class="svc-icon-wrap" style="background:rgba(74,45,122,0.11);">
+            <svg viewBox="0 0 24 24" stroke="#4A2D7A" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Dermatology</h3>
+          <p>Diagnosis and treatment of skin conditions including acne, eczema, rashes, and other dermatological concerns for all ages.</p>
+          <span class="svc-card-link">Learn More</span>
+        </div>
+
+        <!-- 6. Chronic Care -->
+        <div class="svc-card fade-up d5" role="button" tabindex="0" aria-label="Chronic Care — Learn more" onclick="openModal('chronic')" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('chronic')">
+          <div class="svc-icon-wrap" style="background:rgba(30,79,163,0.11);">
+            <svg viewBox="0 0 24 24" stroke="#1E4FA3" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h3>Chronic Care</h3>
+          <p>Ongoing management of conditions like diabetes, hypertension, asthma, and heart disease to help you live a fuller, healthier life.</p>
+          <span class="svc-card-link">Learn More</span>
+        </div>
+
+        <!-- 7. Social Services -->
+        <div class="svc-card fade-up d6" role="button" tabindex="0" aria-label="Social Services — Learn more" onclick="openModal('social')" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('social')">
+          <div class="svc-icon-wrap" style="background:rgba(30,79,163,0.11);">
+            <svg viewBox="0 0 24 24" stroke="#1E4FA3" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>Social Services</h3>
+          <p>Our social workers connect you with housing, food, transportation, benefits enrollment, and community resources.</p>
+          <span class="svc-card-link">Learn More</span>
+        </div>
+
+        <!-- 8. COVID-19 -->
+        <div class="svc-card fade-up d7" role="button" tabindex="0" aria-label="COVID-19 Services — Learn more" onclick="openModal('covid')" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('covid')">
+          <div class="svc-icon-wrap" style="background:rgba(42,122,42,0.12);">
+            <svg viewBox="0 0 24 24" stroke="#2A7A2A" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          </div>
+          <h3>COVID-19</h3>
+          <p>Testing, treatment, and vaccination services following the latest public health guidelines to keep our community safe.</p>
+          <span class="svc-card-link">Learn More</span>
+        </div>
+
+        <!-- 9. On-Site Labs -->
+        <div class="svc-card fade-up d8" role="button" tabindex="0" aria-label="On-Site Labs — Learn more" onclick="openModal('labs')" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('labs')">
+          <div class="svc-icon-wrap" style="background:rgba(240,135,26,0.12);">
+            <svg viewBox="0 0 24 24" stroke="#C8680A" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v11m0 0H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-4m-6 0h6"/></svg>
+          </div>
+          <h3>On-Site Labs</h3>
+          <p>Convenient on-site laboratory services for blood work, urinalysis, and other diagnostic tests with fast turnaround times.</p>
+          <span class="svc-card-link">Learn More</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Arc stripe reversed -->
+  <div class="arc-stripe" aria-hidden="true">
+    <span style="background:#4A2D7A;"></span>
+    <span style="background:#1E4FA3;"></span>
+    <span style="background:#2A7A2A;"></span>
+    <span style="background:#9B2020;"></span>
+    <span style="background:#F0871A;"></span>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       CTA
+  ══════════════════════════════════════════════ -->
+  <section class="section-cta" id="contact" aria-labelledby="cta-heading">
+    <svg class="cta-arc" viewBox="0 0 600 600" fill="none" aria-hidden="true">
+      <path d="M 580 300 Q 580 50 330 50 Q 80 50 80 300 Q 80 550 330 550 Q 580 550 580 300Z" stroke="#1A1A1A" stroke-width="60" fill="none"/>
+    </svg>
+    <div class="container">
+      <div class="cta-inner">
+        <div class="cta-eyebrow fade-up">Ready for Care</div>
+        <h2 class="cta-title fade-up d1" id="cta-heading">
+          Come as you are.<br>We're here for you.
+        </h2>
+        <p class="cta-sub fade-up d2">
+          Whether you need a routine checkup, help managing a chronic condition, or support navigating life's challenges — our doors are open to everyone, regardless of ability to pay.
+        </p>
+        <div class="cta-btns fade-up d3">
+          <a href="index.html#contact" class="btn-white">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 012 2.18 2 2 0 013.17 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            Schedule an Appointment
+          </a>
+          <a href="about.html" class="btn-outline-white">Learn About Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       INFO STRIP
+  ══════════════════════════════════════════════ -->
+  <div class="info-strip" aria-label="Contact information">
+    <div class="container">
+      <div class="info-grid">
+        <div class="info-item fade-up">
+          <div class="info-icon-box" aria-hidden="true">📍</div>
+          <div>
+            <div class="info-label">Location</div>
+            <div class="info-value">3027 Prospect Avenue<br>Kansas City, MO 64128</div>
+          </div>
+        </div>
+        <div class="info-item fade-up d1">
+          <div class="info-icon-box" aria-hidden="true">🕐</div>
+          <div>
+            <div class="info-label">Hours</div>
+            <div class="info-value">Monday – Friday<br>8:00 AM – 5:00 PM</div>
+          </div>
+        </div>
+        <div class="info-item fade-up d2">
+          <div class="info-icon-box" aria-hidden="true">🌐</div>
+          <div>
+            <div class="info-label">Languages</div>
+            <div class="info-value">English &amp; Spanish spoken.<br>All are welcome here.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════════ -->
+  <footer class="footer" aria-label="Site footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="./assets/Logo1tp.gif" alt="Hope Family Care Center" class="footer-logo">
+          <p class="footer-tagline">Loving God. Loving Others.<br>Kansas City's community health home.</p>
+        </div>
+        <nav class="footer-nav-cols" aria-label="Footer navigation">
+          <div class="footer-col">
+            <div class="footer-col-head">Navigate</div>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="services.html">Services</a></li>
+              <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <div class="footer-col-head">Services</div>
+            <ul>
+              <li><a href="#services" onclick="openModal('primary')">Primary Care</a></li>
+              <li><a href="#services" onclick="openModal('pediatrics')">Pediatrics</a></li>
+              <li><a href="#services" onclick="openModal('womens')">Women's Health</a></li>
+              <li><a href="#services" onclick="openModal('chronic')">Chronic Care</a></li>
+              <li><a href="#services" onclick="openModal('social')">Social Services</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 Hope Family Care Center. All rights reserved. Kansas City, MO · Serving 24 Zip Codes.</p>
+        <div class="footer-dots" aria-hidden="true">
+          <span class="footer-dot" style="background:#F0871A;"></span>
+          <span class="footer-dot" style="background:#9B2020;"></span>
+          <span class="footer-dot" style="background:#2A7A2A;"></span>
+          <span class="footer-dot" style="background:#1E4FA3;"></span>
+          <span class="footer-dot" style="background:#4A2D7A;"></span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══════════════════════════════════════════════
+       MODAL
+  ══════════════════════════════════════════════ -->
+  <div id="modal-overlay" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title" onclick="if(event.target===this)closeModal()">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+  <script>
+    const services = {
+      primary: {
+        iconBg: 'rgba(42,122,42,0.12)',
+        icon: '<svg viewBox="0 0 24 24" stroke="#2A7A2A" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+        title: 'Primary Care',
+        tagline: 'Your health partner for life.',
+        body: 'Our primary care team provides comprehensive, continuous health care for adults. Whether you need a routine annual exam, treatment for an illness, or help managing a health condition, we are your first stop and your ongoing partner in health.',
+        features: ['Annual Wellness Exams','Preventive Screenings','Chronic Disease Management','Immunizations','Health Counseling','Referral Coordination'],
+      },
+      pediatrics: {
+        iconBg: 'rgba(200,104,10,0.12)',
+        icon: '<svg viewBox="0 0 24 24" stroke="#C8680A" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>',
+        title: 'Pediatrics',
+        tagline: 'Gentle, compassionate care for your little ones.',
+        body: 'We provide loving, expert care for children from newborns through teenagers. Our pediatric team makes every visit comfortable and reassuring for both children and parents, focusing on healthy development at every age.',
+        features: ['Newborn Care','Well-Child Visits','Immunizations & Vaccines','Developmental Screenings','School & Sports Physicals','Adolescent Health'],
+      },
+      womens: {
+        iconBg: 'rgba(155,32,32,0.10)',
+        icon: '<svg viewBox="0 0 24 24" stroke="#9B2020" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M12 13v8M9 18h6"/></svg>',
+        title: "Women's Health",
+        tagline: 'Caring for women at every stage of life.',
+        body: "Our women's health services are designed to support you through every phase of your life — from adolescence through menopause and beyond. We provide a comfortable, respectful environment where your health concerns are always taken seriously.",
+        features: ['Annual Gynecologic Exams','Pap Smears & Cervical Screenings','Family Planning','Prenatal Guidance','Breast Health','Menopause Management'],
+      },
+      urgent: {
+        iconBg: 'rgba(200,104,10,0.11)',
+        icon: '<svg viewBox="0 0 24 24" stroke="#C8680A" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
+        title: 'Urgent Care',
+        tagline: "Same-day care when you can't wait.",
+        body: "Life doesn't always follow a schedule. When illness or injury strikes and your regular doctor isn't available, our urgent care services are here to help — fast, friendly, and thorough.",
+        features: ['Same-Day Appointments','Minor Injuries & Cuts','Infections & Illnesses','Fever & Flu','Sprains & Strains','Rapid Diagnostic Tests'],
+      },
+      derm: {
+        iconBg: 'rgba(74,45,122,0.11)',
+        icon: '<svg viewBox="0 0 24 24" stroke="#4A2D7A" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+        title: 'Dermatology',
+        tagline: 'Healthy skin for every age and every tone.',
+        body: 'Our dermatology services address a full range of skin conditions for patients of all ages and skin types. We provide caring, expert treatment in a welcoming environment where you feel seen and heard.',
+        features: ['Acne Treatment','Eczema & Psoriasis','Rashes & Skin Infections','Mole & Lesion Evaluation','Skin Cancer Screening','Pediatric Dermatology'],
+      },
+      chronic: {
+        iconBg: 'rgba(30,79,163,0.11)',
+        icon: '<svg viewBox="0 0 24 24" stroke="#1E4FA3" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>',
+        title: 'Chronic Care Management',
+        tagline: 'Living well with a long-term condition.',
+        body: 'Managing a chronic condition is a journey, and you do not have to walk it alone. Our team partners with you to create personalized care plans that help control symptoms, prevent complications, and improve your quality of life.',
+        features: ['Diabetes Management','Hypertension','Asthma & COPD','Heart Disease','Medication Management','Lifestyle & Diet Counseling'],
+      },
+      social: {
+        iconBg: 'rgba(30,79,163,0.11)',
+        icon: '<svg viewBox="0 0 24 24" stroke="#1E4FA3" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+        title: 'Social Services',
+        tagline: 'Practical help for your whole life.',
+        body: 'Good health goes beyond medicine. Our dedicated social workers help you navigate the challenges of everyday life — connecting you with the resources and support systems that make a real difference for you and your family.',
+        features: ['Food Assistance','Housing Support','Transportation Help','Benefits Enrollment','Language Services','Community Referrals'],
+      },
+      covid: {
+        iconBg: 'rgba(42,122,42,0.12)',
+        icon: '<svg viewBox="0 0 24 24" stroke="#2A7A2A" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>',
+        title: 'COVID-19 Services',
+        tagline: 'Keeping our community safe and informed.',
+        body: 'We provide comprehensive COVID-19 services following the most current public health guidelines. Our team is here to test, treat, and protect — so you and your loved ones can stay as healthy as possible.',
+        features: ['COVID-19 Testing','Rapid Antigen Tests','PCR Testing','Vaccinations & Boosters','Treatment Consultation','Long COVID Support'],
+      },
+      labs: {
+        iconBg: 'rgba(200,104,10,0.12)',
+        icon: '<svg viewBox="0 0 24 24" stroke="#C8680A" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v11m0 0H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-4m-6 0h6"/></svg>',
+        title: 'On-Site Laboratory',
+        tagline: 'Fast, convenient diagnostic testing — right here.',
+        body: 'No need to travel to a separate lab. Our on-site laboratory handles a wide range of diagnostic tests with fast turnaround times, so your care team gets the results they need to help you quickly.',
+        features: ['Blood Work & CBC','Metabolic Panels','Urinalysis','Lipid Panels','HbA1c Testing','Rapid Strep & Flu Tests'],
+      },
+    };
+
+    function openModal(key) {
+      const s = services[key];
+      if (!s) return;
+      document.getElementById('modal-content').innerHTML = `
+        <div class="modal-icon" style="background:${s.iconBg}">${s.icon}</div>
+        <h2 id="modal-title">${s.title}</h2>
+        <div class="modal-tagline">${s.tagline}</div>
+        <div class="modal-divider"></div>
+        <p class="modal-body">${s.body}</p>
+        <div class="modal-features">${s.features.map(f => `<span class="modal-feature">${f}</span>`).join('')}</div>
+        <a href="index.html#contact" class="modal-cta">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 012 2.18 2 2 0 013.17 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          Schedule an Appointment
+        </a>
+      `;
+      document.getElementById('modal-overlay').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('modal-overlay').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    // Fade-up intersection observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0, rootMargin: '0px 0px 9999px 0px' });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

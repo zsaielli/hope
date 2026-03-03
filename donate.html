@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donate — Hope Family Care Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --amber:        #F0871A;
+      --amber-dark:   #C8680A;
+      --amber-light:  #FDE8C4;
+      --red:          #9B2020;
+      --red-dark:     #7A1818;
+      --red-light:    #F8D7D7;
+      --green:        #2A7A2A;
+      --blue:         #1E4FA3;
+      --purple:       #4A2D7A;
+      --cream:        #FDF8F0;
+      --cream-dark:   #F2E8D8;
+      --charcoal:     #1A1A1A;
+      --charcoal-mid: #282828;
+      --text-body:    #4A3F35;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: var(--cream);
+      color: var(--text-body);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; }
+
+    /* ─── GRAIN ─────────────────────────────────── */
+    .grain { position: relative; }
+    .grain::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      pointer-events: none;
+      mix-blend-mode: overlay;
+      z-index: 10;
+    }
+
+    /* ─── NAV ────────────────────────────────────── */
+    #main-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      padding: 14px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(26, 26, 26, 0.96);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: padding 0.4s ease;
+    }
+    .nav-logo { height: 48px; }
+    .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+    .nav-links a {
+      font-size: 12.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(255,255,255,0.78); text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .nav-links a:hover { color: var(--amber); }
+    .nav-links a.active { color: var(--amber); }
+    .nav-links a:focus-visible { outline: 2px solid var(--amber); outline-offset: 4px; border-radius: 2px; }
+
+    .nav-cta {
+      background: var(--amber) !important;
+      color: #fff !important;
+      padding: 10px 22px; border-radius: 5px;
+      font-weight: 800 !important;
+      box-shadow: 0 2px 12px rgba(240,135,26,0.35);
+      transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease !important;
+    }
+    .nav-cta:hover {
+      background: var(--amber-dark) !important; transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(240,135,26,0.45) !important;
+    }
+    .nav-cta:active { transform: translateY(0) !important; }
+
+    .nav-phone {
+      display: inline-flex; align-items: center; gap: 7px;
+      color: rgba(255,255,255,0.82) !important;
+      font-size: 13px !important; font-weight: 700 !important;
+      letter-spacing: 0.04em !important; text-transform: none !important;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .nav-phone:hover { color: var(--amber) !important; }
+    .nav-phone svg { flex-shrink: 0; }
+
+    .nav-donate {
+      background: var(--red) !important;
+      color: #fff !important;
+      padding: 10px 22px; border-radius: 5px;
+      font-weight: 800 !important;
+      letter-spacing: 0.08em !important;
+      box-shadow: 0 2px 12px rgba(155,32,32,0.35);
+      transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease !important;
+    }
+    .nav-donate:hover {
+      background: var(--red-dark) !important; transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(155,32,32,0.45) !important;
+    }
+    .nav-donate:active { transform: translateY(0) !important; }
+    .nav-donate.active { background: var(--red-dark) !important; }
+
+    /* ─── PAGE HERO ──────────────────────────────── */
+    .page-hero {
+      position: relative;
+      padding: 160px 80px 100px;
+      background: var(--charcoal);
+      overflow: hidden;
+      text-align: center;
+    }
+    .page-hero-arc {
+      position: absolute; right: -100px; bottom: -100px;
+      width: 600px; height: 600px;
+      opacity: 0.08; pointer-events: none;
+    }
+    .page-hero-arc2 {
+      position: absolute; left: -160px; top: -160px;
+      width: 500px; height: 500px;
+      opacity: 0.05; pointer-events: none;
+    }
+    .page-hero-inner {
+      max-width: 780px; margin: 0 auto;
+      position: relative; z-index: 1;
+    }
+    .hero-eyebrow {
+      font-family: 'Nunito', sans-serif;
+      font-size: 11.5px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 18px;
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+    }
+    .hero-eyebrow::before, .hero-eyebrow::after {
+      content: ''; display: inline-block; width: 44px; height: 2px;
+      background: linear-gradient(to right, var(--amber), var(--amber-dark));
+    }
+    .page-hero h1 {
+      font-size: clamp(48px, 7vw, 88px);
+      font-weight: 300; line-height: 0.98;
+      color: #fff; letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+    .page-hero h1 strong {
+      display: block; font-weight: 700; color: var(--amber);
+    }
+    .page-hero-desc {
+      font-size: 17px; line-height: 1.78;
+      color: rgba(255,255,255,0.62);
+      max-width: 580px; margin: 0 auto;
+    }
+
+    /* ─── ARC STRIPE ─────────────────────────────── */
+    .arc-stripe { display: flex; height: 7px; }
+    .arc-stripe span { flex: 1; }
+
+    /* ─── SHARED LAYOUT ──────────────────────────── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 80px; }
+
+    .section-eyebrow {
+      font-family: 'Nunito', sans-serif;
+      font-size: 11px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 18px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .section-eyebrow::before {
+      content: ''; width: 32px; height: 2px;
+      background: var(--amber); display: inline-block;
+    }
+    .section-title {
+      font-size: clamp(34px, 4.5vw, 52px);
+      font-weight: 600; line-height: 1.1;
+      color: var(--charcoal); letter-spacing: -0.025em;
+      margin-bottom: 16px;
+    }
+    .section-title em { font-style: italic; color: var(--amber-dark); }
+
+    /* ─── IMPACT STATS ───────────────────────────── */
+    .section-impact {
+      background: var(--cream-dark);
+      padding: 80px 0;
+    }
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+    .impact-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 36px 28px;
+      text-align: center;
+      border: 1.5px solid rgba(74,63,53,0.08);
+      box-shadow: 0 2px 18px rgba(26,26,26,0.05), 0 1px 4px rgba(26,26,26,0.04);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .impact-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(26,26,26,0.1); }
+    .impact-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(42px, 5vw, 58px);
+      font-weight: 700; line-height: 1;
+      color: var(--red); margin-bottom: 10px;
+    }
+    .impact-label {
+      font-family: 'Nunito', sans-serif;
+      font-size: 13.5px; color: var(--text-body);
+      font-weight: 600; line-height: 1.5;
+    }
+
+    /* ─── DONATE SPLIT ───────────────────────────── */
+    .section-donate {
+      background: var(--cream);
+      padding: 100px 0;
+    }
+    .donate-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: start;
+    }
+
+    /* Left copy */
+    .donate-copy .section-title { margin-bottom: 20px; }
+    .donate-copy p {
+      font-size: 16px; line-height: 1.78;
+      color: var(--text-body); margin-bottom: 18px;
+    }
+    .impact-list { list-style: none; margin-top: 28px; display: flex; flex-direction: column; gap: 16px; }
+    .impact-list li {
+      display: flex; align-items: flex-start; gap: 14px;
+      font-size: 15.5px; line-height: 1.6; color: var(--text-body);
+    }
+    .impact-check {
+      flex-shrink: 0;
+      width: 26px; height: 26px; border-radius: 50%;
+      background: var(--red-light);
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 1px;
+    }
+    .impact-check svg { width: 13px; height: 13px; }
+    .impact-list strong { color: var(--red); font-weight: 800; }
+
+    /* Right donation card */
+    .donate-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 40px 40px 36px;
+      box-shadow: 0 4px 40px rgba(26,26,26,0.1), 0 2px 12px rgba(26,26,26,0.06);
+      border: 1.5px solid rgba(74,63,53,0.08);
+      position: sticky; top: 100px;
+    }
+    .donate-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px; font-weight: 700;
+      color: var(--charcoal); margin-bottom: 4px; line-height: 1.15;
+    }
+    .donate-card-sub {
+      font-size: 13.5px; color: #9E9189;
+      margin-bottom: 28px; font-family: 'Nunito', sans-serif;
+    }
+
+    /* Frequency tabs */
+    .freq-tabs { display: flex; gap: 8px; margin-bottom: 24px; }
+    .freq-tab {
+      flex: 1; padding: 9px 12px;
+      border-radius: 7px; border: 2px solid rgba(74,63,53,0.14);
+      background: transparent; cursor: pointer;
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px; font-weight: 700;
+      color: var(--text-body);
+      transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+    .freq-tab:hover { border-color: var(--red); color: var(--red); }
+    .freq-tab.active {
+      background: var(--charcoal); border-color: var(--charcoal); color: #fff;
+    }
+    .freq-tab:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+
+    /* Amount grid */
+    .amount-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 8px; margin-bottom: 10px;
+    }
+    .amount-btn {
+      border: 2px solid rgba(74,63,53,0.14);
+      background: transparent; border-radius: 9px;
+      padding: 12px 8px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 700;
+      color: var(--charcoal); cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+    }
+    .amount-btn:hover { border-color: var(--red); color: var(--red); transform: translateY(-2px); }
+    .amount-btn.active {
+      background: var(--red); border-color: var(--red); color: #fff;
+    }
+    .amount-btn:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+
+    /* Custom amount */
+    .custom-amount-wrap {
+      position: relative; margin-bottom: 22px;
+      display: none;
+    }
+    .custom-amount-wrap.visible { display: block; }
+    .custom-prefix {
+      position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 600; color: #9E9189;
+      pointer-events: none;
+    }
+    .custom-amount-input {
+      width: 100%; border: 2px solid rgba(74,63,53,0.14);
+      border-radius: 9px; padding: 12px 16px 12px 30px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 700;
+      color: var(--charcoal); outline: none;
+      transition: border-color 0.2s ease;
+    }
+    .custom-amount-input:focus { border-color: var(--red); }
+    .custom-amount-input::placeholder { color: #C9BFB6; font-weight: 400; }
+
+    /* Donate submit */
+    .donate-submit {
+      width: 100%; margin-top: 20px;
+      background: var(--red); color: #fff;
+      border: none; border-radius: 8px;
+      padding: 17px 24px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 15px; font-weight: 800; letter-spacing: 0.05em;
+      cursor: pointer;
+      box-shadow: 0 4px 24px rgba(155,32,32,0.3);
+      transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+    }
+    .donate-submit:hover {
+      background: var(--red-dark); transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(155,32,32,0.4);
+    }
+    .donate-submit:active { transform: translateY(0); }
+    .donate-submit:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+
+    /* Secure note */
+    .secure-note {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      margin-top: 14px;
+      font-size: 12px; color: #9E9189;
+      font-family: 'Nunito', sans-serif;
+    }
+    .secure-note svg { flex-shrink: 0; color: #9E9189; }
+
+    /* ─── HOW IT HELPS ───────────────────────────── */
+    .section-how {
+      background: var(--charcoal);
+      padding: 100px 0;
+      position: relative; overflow: hidden;
+    }
+    .how-bg-arc {
+      position: absolute; right: -180px; top: 50%; transform: translateY(-50%);
+      width: 700px; height: 700px; opacity: 0.05; pointer-events: none;
+    }
+    .section-how .section-eyebrow { color: var(--amber); }
+    .section-how .section-eyebrow::before { background: var(--amber); }
+    .section-how .section-title { color: #fff; }
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+      margin-top: 52px;
+    }
+    .how-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 36px 32px;
+      display: flex; gap: 22px; align-items: flex-start;
+      transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    }
+    .how-card:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(240,135,26,0.2);
+      transform: translateY(-4px);
+    }
+    .how-icon {
+      width: 54px; height: 54px; border-radius: 13px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 26px;
+    }
+    .how-card h3 {
+      font-size: 22px; font-weight: 700;
+      color: #fff; margin-bottom: 8px; line-height: 1.2;
+    }
+    .how-card p {
+      font-size: 14.5px; line-height: 1.72;
+      color: rgba(255,255,255,0.55);
+    }
+
+    /* ─── QUOTE SECTION ──────────────────────────── */
+    .section-quote {
+      background: var(--cream);
+      padding: 100px 0;
+      text-align: center;
+    }
+    .quote-mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 120px; line-height: 0.6;
+      color: var(--amber); opacity: 0.25;
+      display: block; margin-bottom: 8px;
+      user-select: none;
+    }
+    blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(22px, 3.2vw, 34px);
+      font-style: italic;
+      font-weight: 400; line-height: 1.48;
+      color: var(--charcoal);
+      max-width: 760px; margin: 0 auto 28px;
+    }
+    cite {
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--amber-dark); font-style: normal;
+    }
+
+    /* ─── CTA SECTION ────────────────────────────── */
+    .section-cta {
+      background: var(--amber);
+      padding: 100px 0;
+      position: relative; overflow: hidden;
+    }
+    .cta-arc {
+      position: absolute; right: -200px; top: 50%; transform: translateY(-50%);
+      width: 700px; height: 700px; opacity: 0.08; pointer-events: none;
+    }
+    .cta-inner { text-align: center; position: relative; z-index: 1; }
+    .cta-eyebrow {
+      font-family: 'Nunito', sans-serif;
+      font-size: 11px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(255,255,255,0.65); margin-bottom: 18px;
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+    }
+    .cta-eyebrow::before, .cta-eyebrow::after {
+      content: ''; width: 28px; height: 1px;
+      background: rgba(255,255,255,0.45); display: inline-block;
+    }
+    .cta-title {
+      font-size: clamp(38px, 6vw, 68px);
+      font-weight: 600; line-height: 1.05;
+      letter-spacing: -0.03em; color: #fff;
+      margin-bottom: 18px;
+    }
+    .cta-sub {
+      font-size: 17px; color: rgba(255,255,255,0.8);
+      line-height: 1.72; margin-bottom: 44px;
+      max-width: 600px; margin-left: auto; margin-right: auto;
+    }
+    .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-white {
+      background: #fff; color: var(--amber-dark);
+      padding: 17px 38px; border-radius: 5px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px; font-weight: 800; letter-spacing: 0.06em;
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 10px;
+      box-shadow: 0 4px 28px rgba(0,0,0,0.18);
+      transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .btn-white:hover { background: var(--cream); transform: translateY(-2px); box-shadow: 0 10px 40px rgba(0,0,0,0.22); }
+    .btn-white:active { transform: translateY(0); }
+    .btn-white:focus-visible { outline: 2px solid rgba(255,255,255,0.7); outline-offset: 3px; }
+
+    .btn-outline-white {
+      background: transparent; color: #fff;
+      padding: 17px 38px; border-radius: 5px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px; font-weight: 800; letter-spacing: 0.06em;
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 10px;
+      border: 2px solid rgba(255,255,255,0.55);
+      transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+    }
+    .btn-outline-white:hover { border-color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+    .btn-outline-white:active { transform: translateY(0); }
+    .btn-outline-white:focus-visible { outline: 2px solid rgba(255,255,255,0.7); outline-offset: 3px; }
+
+    /* ─── INFO STRIP ─────────────────────────────── */
+    .info-strip { background: var(--charcoal-mid); padding: 64px 0; }
+    .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; }
+    .info-item { display: flex; align-items: flex-start; gap: 18px; }
+    .info-icon-box {
+      width: 46px; height: 46px; border-radius: 10px;
+      background: rgba(240,135,26,0.14);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; flex-shrink: 0;
+    }
+    .info-label {
+      font-family: 'Nunito', sans-serif;
+      font-size: 10px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 5px;
+    }
+    .info-value { font-size: 15px; color: rgba(255,255,255,0.72); line-height: 1.6; }
+
+    /* ─── FOOTER ─────────────────────────────────── */
+    .footer {
+      background: var(--charcoal);
+      padding: 72px 0 48px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    .footer-top {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding-bottom: 52px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      margin-bottom: 40px; gap: 48px;
+    }
+    .footer-brand { max-width: 280px; }
+    .footer-logo { height: 64px; margin-bottom: 14px; }
+    .footer-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px; font-style: italic;
+      color: rgba(255,255,255,0.4); line-height: 1.5;
+    }
+    .footer-nav-cols { display: flex; gap: 64px; }
+    .footer-col-head {
+      font-family: 'Nunito', sans-serif;
+      font-size: 10.5px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 18px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+    .footer-col a {
+      font-size: 14px; color: rgba(255,255,255,0.45); text-decoration: none;
+      font-family: 'Nunito', sans-serif;
+      transition: color 0.2s ease;
+    }
+    .footer-col a:hover { color: rgba(255,255,255,0.85); }
+    .footer-bottom {
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 16px;
+    }
+    .footer-copy { font-size: 12.5px; color: rgba(255,255,255,0.25); font-family: 'Nunito', sans-serif; }
+    .footer-dots { display: flex; gap: 6px; align-items: center; }
+    .footer-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+
+    /* ─── FADE-UP ─────────────────────────────────── */
+    .fade-up {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up.d1 { transition-delay: 0.08s; }
+    .fade-up.d2 { transition-delay: 0.16s; }
+    .fade-up.d3 { transition-delay: 0.24s; }
+    .fade-up.d4 { transition-delay: 0.32s; }
+
+    /* ─── RESPONSIVE ─────────────────────────────── */
+    @media (max-width: 1024px) {
+      .impact-grid { grid-template-columns: repeat(2, 1fr); }
+      .how-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 900px) {
+      .donate-grid { grid-template-columns: 1fr; gap: 48px; }
+      .donate-card { position: static; }
+    }
+    @media (max-width: 768px) {
+      .container { padding: 0 28px; }
+      .page-hero { padding: 130px 28px 80px; }
+      .section-impact, .section-donate, .section-how, .section-quote, .section-cta, .info-strip, .footer { padding-top: 72px; padding-bottom: 72px; }
+      .impact-grid { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { display: none; }
+      .info-grid { grid-template-columns: 1fr; gap: 28px; }
+      .footer-top { flex-direction: column; }
+      .footer-nav-cols { flex-direction: column; gap: 32px; }
+    }
+    @media (max-width: 560px) {
+      .impact-grid { grid-template-columns: 1fr; }
+      .how-grid { grid-template-columns: 1fr; }
+      .amount-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════
+       NAV
+  ══════════════════════════════════════════════ -->
+  <nav id="main-nav" aria-label="Main navigation">
+    <a href="index.html" aria-label="Hope Family Care Center home">
+      <img src="./assets/Logo1tp.gif" alt="Hope Family Care Center" class="nav-logo">
+    </a>
+    <ul class="nav-links">
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+      <li><a href="tel:+18168616500" class="nav-phone" aria-label="Call us at (816) 861-6500"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 012 2.18 2 2 0 013.17 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>(816) 861-6500</a></li>
+      <li><a href="index.html#contact" class="nav-cta">Get Help Today</a></li>
+      <li><a href="donate.html" class="nav-donate active">Donate</a></li>
+    </ul>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════
+       PAGE HERO
+  ══════════════════════════════════════════════ -->
+  <section class="page-hero grain" aria-label="Donate">
+    <svg class="page-hero-arc" viewBox="0 0 600 600" fill="none" aria-hidden="true">
+      <circle cx="300" cy="300" r="240" stroke="white" stroke-width="1.5"/>
+      <circle cx="300" cy="300" r="180" stroke="white" stroke-width="1"/>
+      <circle cx="300" cy="300" r="120" stroke="white" stroke-width="0.75"/>
+    </svg>
+    <svg class="page-hero-arc2" viewBox="0 0 500 500" fill="none" aria-hidden="true">
+      <circle cx="250" cy="250" r="200" stroke="white" stroke-width="1.5"/>
+      <circle cx="250" cy="250" r="130" stroke="white" stroke-width="1"/>
+    </svg>
+    <div class="page-hero-inner">
+      <div class="hero-eyebrow fade-up">Support Our Mission</div>
+      <h1 class="fade-up d1">Your Gift Brings<br><strong>Health &amp; Hope</strong></h1>
+      <p class="page-hero-desc fade-up d2">Help us provide quality, compassionate care to Kansas City families — regardless of their ability to pay.</p>
+    </div>
+  </section>
+
+  <!-- Arc stripe -->
+  <div class="arc-stripe" aria-hidden="true">
+    <span style="background:#F0871A;"></span>
+    <span style="background:#9B2020;"></span>
+    <span style="background:#2A7A2A;"></span>
+    <span style="background:#1E4FA3;"></span>
+    <span style="background:#4A2D7A;"></span>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       IMPACT STATS
+  ══════════════════════════════════════════════ -->
+  <section class="section-impact" aria-label="Impact statistics">
+    <div class="container">
+      <div class="impact-grid">
+        <div class="impact-card fade-up">
+          <div class="impact-number">15,000+</div>
+          <div class="impact-label">Patients served each year</div>
+        </div>
+        <div class="impact-card fade-up d1">
+          <div class="impact-number">50+</div>
+          <div class="impact-label">Zip codes served across Kansas City</div>
+        </div>
+        <div class="impact-card fade-up d2">
+          <div class="impact-number">30+</div>
+          <div class="impact-label">Years of serving our community</div>
+        </div>
+        <div class="impact-card fade-up d3">
+          <div class="impact-number">$0</div>
+          <div class="impact-label">Cost to patients who cannot afford care</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       WHY YOUR SUPPORT MATTERS + DONATION FORM
+  ══════════════════════════════════════════════ -->
+  <section class="section-donate" aria-label="Make a donation">
+    <div class="container">
+      <div class="donate-grid">
+
+        <!-- Copy -->
+        <div class="donate-copy">
+          <div class="section-eyebrow fade-up">Why It Matters</div>
+          <h2 class="section-title fade-up d1">Your Support<br><em>Changes Lives</em></h2>
+          <p class="fade-up d2">
+            Hope Family Care Center has been a cornerstone of health in Kansas City for decades. We serve patients who are uninsured, underinsured, and underserved — offering primary care, behavioral health, women's health, and more.
+          </p>
+          <p class="fade-up d2">
+            Your donation helps ensure that cost is never a barrier to getting the care a family needs.
+          </p>
+          <ul class="impact-list">
+            <li class="fade-up d3">
+              <span class="impact-check">
+                <svg viewBox="0 0 14 14" fill="none" stroke="#9B2020" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2 7 5.5 10.5 12 3.5"/></svg>
+              </span>
+              <span><strong>$25</strong> covers a well-child visit for a child with no insurance</span>
+            </li>
+            <li class="fade-up d3">
+              <span class="impact-check">
+                <svg viewBox="0 0 14 14" fill="none" stroke="#9B2020" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2 7 5.5 10.5 12 3.5"/></svg>
+              </span>
+              <span><strong>$50</strong> provides diabetes management support for an uninsured adult</span>
+            </li>
+            <li class="fade-up d3">
+              <span class="impact-check">
+                <svg viewBox="0 0 14 14" fill="none" stroke="#9B2020" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2 7 5.5 10.5 12 3.5"/></svg>
+              </span>
+              <span><strong>$100</strong> funds a behavioral health session for a family in crisis</span>
+            </li>
+            <li class="fade-up d3">
+              <span class="impact-check">
+                <svg viewBox="0 0 14 14" fill="none" stroke="#9B2020" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2 7 5.5 10.5 12 3.5"/></svg>
+              </span>
+              <span><strong>Monthly gifts</strong> create lasting, sustained impact in our community</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Donation Card -->
+        <div class="donate-card fade-up d2" aria-label="Donation form">
+          <h3 class="donate-card-title">Make a Donation</h3>
+          <p class="donate-card-sub">Every dollar goes directly to patient care.</p>
+
+          <div class="freq-tabs" role="group" aria-label="Donation frequency">
+            <button class="freq-tab active" id="tab-onetime" onclick="setFreq(this,'one-time')" aria-pressed="true">One-Time</button>
+            <button class="freq-tab" id="tab-monthly" onclick="setFreq(this,'monthly')" aria-pressed="false">Monthly</button>
+          </div>
+
+          <div class="amount-grid" id="amountGrid" role="group" aria-label="Donation amounts">
+            <button class="amount-btn" onclick="selectAmount(this,25)">$25</button>
+            <button class="amount-btn active" onclick="selectAmount(this,50)">$50</button>
+            <button class="amount-btn" onclick="selectAmount(this,100)">$100</button>
+            <button class="amount-btn" onclick="selectAmount(this,250)">$250</button>
+            <button class="amount-btn" onclick="selectAmount(this,500)">$500</button>
+            <button class="amount-btn" onclick="selectAmount(this,null)">Other</button>
+          </div>
+
+          <div class="custom-amount-wrap" id="customAmountWrap">
+            <span class="custom-prefix">$</span>
+            <input
+              type="number"
+              id="customAmount"
+              class="custom-amount-input"
+              placeholder="Enter amount"
+              min="1"
+              aria-label="Custom donation amount"
+            />
+          </div>
+
+          <button class="donate-submit" id="donateBtn" onclick="handleDonate()">
+            Donate $50 Now
+          </button>
+
+          <div class="secure-note" aria-label="Secure donation">
+            <svg width="14" height="15" viewBox="0 0 14 16" fill="none" aria-hidden="true">
+              <path d="M7 1L1 3.5V8c0 3.31 2.56 6.41 6 7 3.44-.59 6-3.69 6-7V3.5L7 1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
+              <path d="M4.5 8l1.5 1.5L9 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Secure, encrypted donation
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Arc stripe reversed -->
+  <div class="arc-stripe" aria-hidden="true">
+    <span style="background:#4A2D7A;"></span>
+    <span style="background:#1E4FA3;"></span>
+    <span style="background:#2A7A2A;"></span>
+    <span style="background:#9B2020;"></span>
+    <span style="background:#F0871A;"></span>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       WHERE YOUR GIFT GOES
+  ══════════════════════════════════════════════ -->
+  <section class="section-how" aria-label="Where your gift goes">
+    <svg class="how-bg-arc" viewBox="0 0 700 700" fill="none" aria-hidden="true">
+      <circle cx="350" cy="350" r="280" stroke="white" stroke-width="1.5"/>
+      <circle cx="350" cy="350" r="200" stroke="white" stroke-width="1"/>
+      <circle cx="350" cy="350" r="120" stroke="white" stroke-width="0.75"/>
+    </svg>
+    <div class="container">
+      <div class="section-eyebrow fade-up">Your Impact</div>
+      <h2 class="section-title fade-up d1">Where Your Gift Goes</h2>
+      <div class="how-grid">
+        <div class="how-card fade-up d1">
+          <div class="how-icon" style="background:rgba(42,122,42,0.15);">🩺</div>
+          <div>
+            <h3>Primary Care</h3>
+            <p>Preventive checkups, chronic disease management, and urgent care for adults and children — regardless of insurance status.</p>
+          </div>
+        </div>
+        <div class="how-card fade-up d2">
+          <div class="how-icon" style="background:rgba(30,79,163,0.15);">🧠</div>
+          <div>
+            <h3>Behavioral Health</h3>
+            <p>Mental health counseling, substance use support, and crisis intervention for individuals and families in need.</p>
+          </div>
+        </div>
+        <div class="how-card fade-up d3">
+          <div class="how-icon" style="background:rgba(155,32,32,0.12);">👶</div>
+          <div>
+            <h3>Women &amp; Children</h3>
+            <p>Prenatal care, well-child visits, and women's health services that keep Kansas City families healthy from the start.</p>
+          </div>
+        </div>
+        <div class="how-card fade-up d4">
+          <div class="how-icon" style="background:rgba(74,45,122,0.15);">💊</div>
+          <div>
+            <h3>Pharmacy &amp; Medications</h3>
+            <p>Affordable prescription access so patients can afford the medications their doctors prescribe.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Arc stripe -->
+  <div class="arc-stripe" aria-hidden="true">
+    <span style="background:#F0871A;"></span>
+    <span style="background:#9B2020;"></span>
+    <span style="background:#2A7A2A;"></span>
+    <span style="background:#1E4FA3;"></span>
+    <span style="background:#4A2D7A;"></span>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       QUOTE
+  ══════════════════════════════════════════════ -->
+  <section class="section-quote" aria-label="Patient testimonial">
+    <div class="container">
+      <span class="quote-mark fade-up" aria-hidden="true">"</span>
+      <blockquote class="fade-up d1">
+        Hope Family Care Center gave my family somewhere to turn when we had no one else. Their care changed our lives.
+      </blockquote>
+      <cite class="fade-up d2">— A Hope Family Care Center Patient</cite>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       CTA
+  ══════════════════════════════════════════════ -->
+  <section class="section-cta grain" aria-label="Call to action">
+    <svg class="cta-arc" viewBox="0 0 700 700" fill="none" aria-hidden="true">
+      <circle cx="350" cy="350" r="280" stroke="white" stroke-width="2"/>
+      <circle cx="350" cy="350" r="200" stroke="white" stroke-width="1.5"/>
+      <circle cx="350" cy="350" r="120" stroke="white" stroke-width="1"/>
+    </svg>
+    <div class="container">
+      <div class="cta-inner">
+        <div class="cta-eyebrow fade-up">Questions About Giving</div>
+        <h2 class="cta-title fade-up d1">We'd Love to<br>Hear From You</h2>
+        <p class="cta-sub fade-up d2">
+          Have questions about donating, or interested in making a larger contribution? Reach out to our team — we'd love to connect.
+        </p>
+        <div class="cta-btns fade-up d3">
+          <a href="tel:+18168616500" class="btn-white">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 012 2.18 2 2 0 013.17 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            Call Us Today
+          </a>
+          <a href="index.html#contact" class="btn-outline-white">Learn More About Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       INFO STRIP
+  ══════════════════════════════════════════════ -->
+  <div class="info-strip" aria-label="Contact information">
+    <div class="container">
+      <div class="info-grid">
+        <div class="info-item fade-up">
+          <div class="info-icon-box" aria-hidden="true">📍</div>
+          <div>
+            <div class="info-label">Location</div>
+            <div class="info-value">3027 Prospect Avenue<br>Kansas City, MO 64128</div>
+          </div>
+        </div>
+        <div class="info-item fade-up d1">
+          <div class="info-icon-box" aria-hidden="true">🕐</div>
+          <div>
+            <div class="info-label">Hours</div>
+            <div class="info-value">Monday – Friday<br>8:00 AM – 5:00 PM</div>
+          </div>
+        </div>
+        <div class="info-item fade-up d2">
+          <div class="info-icon-box" aria-hidden="true">📞</div>
+          <div>
+            <div class="info-label">Phone</div>
+            <div class="info-value">(816) 861-6500</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════════ -->
+  <footer class="footer" aria-label="Site footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="./assets/Logo1tp.gif" alt="Hope Family Care Center" class="footer-logo">
+          <p class="footer-tagline">Loving God. Loving Others.<br>Kansas City's community health home.</p>
+        </div>
+        <nav class="footer-nav-cols" aria-label="Footer navigation">
+          <div class="footer-col">
+            <div class="footer-col-head">Navigate</div>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="services.html">Services</a></li>
+              <li><a href="donate.html">Donate</a></li>
+              <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <div class="footer-col-head">Give</div>
+            <ul>
+              <li><a href="donate.html">Make a Donation</a></li>
+              <li><a href="donate.html">Monthly Giving</a></li>
+              <li><a href="tel:+18168616500">Call to Give</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 Hope Family Care Center. All rights reserved. Kansas City, MO · Serving 24 Zip Codes.</p>
+        <div class="footer-dots" aria-hidden="true">
+          <span class="footer-dot" style="background:#F0871A;"></span>
+          <span class="footer-dot" style="background:#9B2020;"></span>
+          <span class="footer-dot" style="background:#2A7A2A;"></span>
+          <span class="footer-dot" style="background:#1E4FA3;"></span>
+          <span class="footer-dot" style="background:#4A2D7A;"></span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    let selectedAmount = 50;
+    let isMonthly = false;
+
+    function setFreq(btn, type) {
+      document.querySelectorAll('.freq-tab').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
+      isMonthly = (type === 'monthly');
+      updateBtn();
+    }
+
+    function selectAmount(btn, amount) {
+      document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const wrap = document.getElementById('customAmountWrap');
+      if (amount === null) {
+        wrap.classList.add('visible');
+        document.getElementById('customAmount').focus();
+        selectedAmount = null;
+      } else {
+        wrap.classList.remove('visible');
+        selectedAmount = amount;
+      }
+      updateBtn();
+    }
+
+    document.getElementById('customAmount').addEventListener('input', function () {
+      selectedAmount = parseFloat(this.value) || null;
+      updateBtn();
+    });
+
+    function updateBtn() {
+      const btn = document.getElementById('donateBtn');
+      const freq = isMonthly ? '/month' : ' Now';
+      if (selectedAmount) {
+        btn.textContent = 'Donate $' + selectedAmount + freq;
+      } else {
+        btn.textContent = 'Donate Now';
+      }
+    }
+
+    function handleDonate() {
+      const amount = selectedAmount || parseFloat(document.getElementById('customAmount').value);
+      if (!amount || amount < 1) {
+        alert('Please enter a donation amount.');
+        return;
+      }
+      alert('Thank you for your generosity! You\'re being redirected to our secure payment page.');
+    }
+
+    // Fade-up intersection observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0, rootMargin: '0px 0px 9999px 0px' });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

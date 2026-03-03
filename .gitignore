@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+
+# Puppeteer cache
+.cache/
+
+# Temporary screenshots (dev tool, not site content)
+temporary screenshots/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+*.swp

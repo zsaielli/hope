@@ -56,17 +56,19 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       padding: 14px 48px;
       display: flex; align-items: center; justify-content: space-between;
-      background: rgba(26, 26, 26, 0.96);
+      background: rgba(255, 252, 247, 0.98);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
       transition: padding 0.4s ease;
     }
     .nav-logo { height: 48px; }
+    .nav-brand { display: flex; align-items: center; gap: 10px; }
+    .nav-hope-text { height: 56px; align-self: flex-end; transform: translateY(10px); }
     .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
     .nav-links a {
       font-size: 12.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
-      color: rgba(255,255,255,0.78); text-decoration: none;
+      color: rgba(26,26,26,0.72); text-decoration: none;
       transition: color 0.2s ease;
     }
     .nav-links a:hover { color: var(--amber); }
@@ -89,7 +91,7 @@
 
     .nav-phone {
       display: inline-flex; align-items: center; gap: 7px;
-      color: rgba(255,255,255,0.82) !important;
+      color: rgba(26,26,26,0.75) !important;
       font-size: 13px !important; font-weight: 700 !important;
       letter-spacing: 0.04em !important; text-transform: none !important;
       text-decoration: none;
@@ -113,6 +115,55 @@
     }
     .nav-donate:active { transform: translateY(0) !important; }
     .nav-donate.active { background: var(--red-dark) !important; }
+
+    /* Hamburger toggle — hidden on desktop */
+    .nav-toggle { display: none; }
+
+    /* ─── MOBILE NAV OVERLAY (body-level, avoids backdrop-filter clip) ─── */
+    #mob-nav {
+      position: fixed; inset: 0; z-index: 99999;
+      background: rgba(0,0,0,0.45);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.28s ease;
+    }
+    body.nav-open #mob-nav { opacity: 1; pointer-events: all; }
+    body.nav-open { overflow: hidden; }
+    .mob-panel {
+      position: absolute; right: 0; top: 0; height: 100%;
+      width: 72%; max-width: 300px;
+      background: rgba(26,26,26,0.92);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      display: flex; flex-direction: column;
+      padding-top: 68px;
+      transform: translateX(100%);
+      transition: transform 0.32s cubic-bezier(0.4,0,0.2,1);
+      overflow-y: auto;
+    }
+    body.nav-open .mob-panel { transform: translateX(0); }
+    .mob-close {
+      position: absolute; top: 18px; right: 18px;
+      background: none; border: none; cursor: pointer; padding: 8px;
+      color: rgba(255,255,255,0.7); line-height: 1;
+      transition: color 0.2s ease;
+    }
+    .mob-close:hover { color: var(--amber); }
+    #mob-nav .nav-links {
+      display: flex !important; flex-direction: column;
+      gap: 0; list-style: none; margin: 0; padding: 0 0 40px; width: 100%;
+    }
+    #mob-nav .nav-links li { width: 100%; }
+    #mob-nav .nav-links li a {
+      display: block !important; padding: 15px 28px;
+      font-size: 12.5px !important; letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.82) !important; text-transform: uppercase;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      transition: color 0.2s ease, background 0.2s ease;
+    }
+    #mob-nav .nav-links li a:hover { color: var(--amber) !important; background: rgba(255,255,255,0.04); }
+    #mob-nav .nav-links .nav-phone { display: flex !important; align-items: center; gap: 8px; text-transform: none !important; font-size: 13px !important; }
+    #mob-nav .nav-links .nav-cta { display: block !important; margin: 20px 28px 6px; padding: 12px 24px !important; font-size: 12px !important; text-align: center; border-bottom: none !important; border-radius: 5px; }
+    #mob-nav .nav-links .nav-donate { display: block !important; margin: 0 28px 20px; padding: 12px 24px !important; font-size: 12px !important; text-align: center; border-bottom: none !important; border-radius: 5px; }
+    @media (min-width: 769px) { #mob-nav { display: none !important; } }
 
     /* ─── PAGE HERO ──────────────────────────────── */
     .page-hero {
@@ -575,6 +626,21 @@
       .page-hero { padding: 130px 28px 80px; }
       .section-impact, .section-donate, .section-how, .section-quote, .section-cta, .info-strip, .footer { padding-top: 72px; padding-bottom: 72px; }
       .impact-grid { grid-template-columns: repeat(2, 1fr); }
+      /* Hamburger button */
+      .nav-toggle {
+        display: flex; flex-direction: column; justify-content: center;
+        gap: 5px; background: none; border: none; cursor: pointer;
+        padding: 6px; z-index: 1001;
+      }
+      .nav-toggle span {
+        display: block; width: 22px; height: 2px;
+        background: rgba(255,255,255,0.9); border-radius: 2px;
+        transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease;
+        transform-origin: center;
+      }
+      body.nav-open .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      body.nav-open .nav-toggle span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+      body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
       .nav-links { display: none; }
       .info-grid { grid-template-columns: 1fr; gap: 28px; }
       .footer-top { flex-direction: column; }
@@ -593,18 +659,25 @@
        NAV
   ══════════════════════════════════════════════ -->
   <nav id="main-nav" aria-label="Main navigation">
-    <a href="index.html" aria-label="Hope Family Care Center home">
+    <a href="index.html" aria-label="Hope Family Care Center home" class="nav-brand">
       <img src="./assets/Logo1tp.gif" alt="Hope Family Care Center" class="nav-logo">
+      <img src="./assets/hope_senlot_sans_condensed.gif" alt="hope" class="nav-hope-text">
     </a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
     <ul class="nav-links">
       <li><a href="about.html">About Us</a></li>
+      <li><a href="team.html">Our Team</a></li>
       <li><a href="services.html">Services</a></li>
+      <li><a href="volunteer.html">Volunteer</a></li>
       <li><a href="index.html#contact">Contact</a></li>
       <li><a href="tel:+18168616500" class="nav-phone" aria-label="Call us at (816) 861-6500"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 012 2.18 2 2 0 013.17 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>(816) 861-6500</a></li>
       <li><a href="index.html#contact" class="nav-cta">Get Help Today</a></li>
       <li><a href="donate.html" class="nav-donate active">Donate</a></li>
     </ul>
   </nav>
+  <div id="mob-nav" aria-hidden="true"></div>
 
   <!-- ══════════════════════════════════════════════
        PAGE HERO
@@ -992,6 +1065,34 @@
     }, { threshold: 0, rootMargin: '0px 0px 9999px 0px' });
 
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Mobile hamburger nav — right-side drawer
+    const navToggle = document.getElementById('nav-toggle');
+    const mobNav = document.getElementById('mob-nav');
+    const panel = document.createElement('div');
+    panel.className = 'mob-panel';
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'mob-close';
+    closeBtn.setAttribute('aria-label', 'Close menu');
+    closeBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+    panel.appendChild(closeBtn);
+    panel.appendChild(document.querySelector('nav .nav-links').cloneNode(true));
+    mobNav.appendChild(panel);
+    function closeNav() {
+      document.body.classList.remove('nav-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.setAttribute('aria-label', 'Open navigation menu');
+      mobNav.setAttribute('aria-hidden', 'true');
+    }
+    navToggle.addEventListener('click', () => {
+      const isOpen = document.body.classList.toggle('nav-open');
+      navToggle.setAttribute('aria-expanded', isOpen);
+      navToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+      mobNav.setAttribute('aria-hidden', !isOpen);
+    });
+    mobNav.addEventListener('click', e => {
+      if (e.target === mobNav || e.target.closest('.mob-close') || e.target.closest('a')) closeNav();
+    });
   </script>
 </body>
 </html>

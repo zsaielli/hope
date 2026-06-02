@@ -519,6 +519,56 @@
       .footer-nav-cols { flex-direction: column; gap: 32px; }
       .vol-card-top, .vol-card-body { padding-left: 28px; padding-right: 28px; }
     }
+
+    /* ─── GOOGLE TRANSLATE ───────────────────────── */
+    /* Kill the top notification bar Google injects */
+    .goog-te-banner-frame,
+    .goog-te-banner-frame.skiptranslate { display: none !important; }
+    body { top: 0 !important; }
+
+    /* Hide Google's own branding text under the widget */
+    .goog-te-gadget > span,
+    .goog-logo-link { display: none !important; }
+
+    .nav-translate-item { display: flex; align-items: center; }
+
+    /* Outer box */
+    .goog-te-gadget-simple {
+      border: 1.5px solid rgba(0,0,0,0.14) !important;
+      border-radius: 5px !important;
+      padding: 0 !important;
+      background: transparent !important;
+      transition: border-color 0.2s ease !important;
+    }
+    .goog-te-gadget-simple:hover { border-color: var(--amber) !important; }
+
+    /* Clickable label inside */
+    .goog-te-gadget-simple a.goog-te-menu-value {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 5px !important;
+      padding: 6px 10px !important;
+      font-family: 'Nunito', sans-serif !important;
+      font-size: 11.5px !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.1em !important;
+      text-transform: uppercase !important;
+      color: rgba(26,26,26,0.72) !important;
+      text-decoration: none !important;
+    }
+    .goog-te-gadget-simple a.goog-te-menu-value:hover { color: var(--amber) !important; }
+
+    /* Hide Google's flag image */
+    .goog-te-gadget-simple img { display: none !important; }
+
+    /* Style the little dropdown arrow */
+    .goog-te-gadget-simple .goog-te-menu-value > span:last-child {
+      border-color: rgba(26,26,26,0.45) transparent transparent !important;
+      margin-left: 2px !important;
+    }
+
+    /* Mobile — hide translate in the drawer (widget can't duplicate) */
+    #mob-nav .nav-translate-item { display: none !important; }
   </style>
 </head>
 
@@ -541,6 +591,9 @@
       <li><a href="services.html">Services</a></li>
       <li><a href="volunteer.html" class="active">Volunteer</a></li>
       <li><a href="index.html#contact">Contact</a></li>
+      <li class="nav-translate-item">
+        <div id="google_translate_element"></div>
+      </li>
       <li><a href="tel:+18168616500" class="nav-phone" aria-label="Call us at (816) 861-6500"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 012 2.18 2 2 0 013.17 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>(816) 861-6500</a></li>
       <li><a href="index.html#contact" class="nav-cta">Get Help Today</a></li>
       <li><a href="donate.html" class="nav-donate">Donate</a></li>
@@ -792,7 +845,17 @@
     }, { threshold: 0, rootMargin: '0px 0px 9999px 0px' });
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-    // Mobile hamburger nav — right-side drawer
+    // Google Translate init
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'zh-CN,nl,en,fr,de,it,pt,ru,es',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+
+        // Mobile hamburger nav — right-side drawer
     const navToggle = document.getElementById('nav-toggle');
     const mobNav = document.getElementById('mob-nav');
     const panel = document.createElement('div');
@@ -802,7 +865,10 @@
     closeBtn.setAttribute('aria-label', 'Close menu');
     closeBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
     panel.appendChild(closeBtn);
-    panel.appendChild(document.querySelector('nav .nav-links').cloneNode(true));
+    const clonedLinks = document.querySelector('nav .nav-links').cloneNode(true);
+    const clonedTranslate = clonedLinks.querySelector('.nav-translate-item');
+    if (clonedTranslate) clonedTranslate.remove();
+    panel.appendChild(clonedLinks);
     mobNav.appendChild(panel);
     function closeNav() {
       document.body.classList.remove('nav-open');
@@ -820,5 +886,6 @@
       if (e.target === mobNav || e.target.closest('.mob-close') || e.target.closest('a')) closeNav();
     });
   </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>

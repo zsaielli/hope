@@ -175,7 +175,7 @@
     #mob-nav .nav-links .nav-phone { display: flex !important; align-items: center; gap: 8px; text-transform: none !important; font-size: 13px !important; }
     #mob-nav .nav-links .nav-cta { display: block !important; margin: 20px 28px 6px; padding: 12px 24px !important; font-size: 12px !important; text-align: center; border-bottom: none !important; border-radius: 5px; }
     #mob-nav .nav-links .nav-donate { display: block !important; margin: 0 28px 20px; padding: 12px 24px !important; font-size: 12px !important; text-align: center; border-bottom: none !important; border-radius: 5px; }
-    @media (max-width: 1180px) {
+    @media (max-width: 1400px) {
       /* Hamburger button */
       .nav-toggle {
         display: flex; flex-direction: column; justify-content: center;
@@ -193,7 +193,7 @@
       body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
       .nav-links { display: none; }
     }
-    @media (min-width: 1181px) { #mob-nav { display: none !important; } }
+    @media (min-width: 1401px) { #mob-nav { display: none !important; } }
 
     /* ─── PAGE HERO ──────────────────────────────── */
     .page-hero {
@@ -505,6 +505,18 @@
     .fade-up.d2 { transition-delay: 0.20s; }
     .fade-up.d3 { transition-delay: 0.30s; }
     .fade-up.d4 { transition-delay: 0.40s; }
+
+    /* ─── REDUCED MOTION ──────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .fade-up { opacity: 1 !important; transform: none !important; }
+      .hero-bg { transform: scale(1) !important; }
+    }
     .fade-up.d5 { transition-delay: 0.50s; }
 
     /* ─── RESPONSIVE ─────────────────────────────── */

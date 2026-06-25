@@ -68,8 +68,8 @@
     .nav-logo { height: 48px; transition: height 0.4s ease; }
     #main-nav.scrolled .nav-logo { height: 40px; }
     .nav-brand { display: flex; align-items: center; gap: 10px; }
-    .nav-hope-text { height: 56px; align-self: flex-end; transform: translateY(10px); transition: height 0.4s ease; }
-    #main-nav.scrolled .nav-hope-text { height: 48px; }
+    .nav-hope-text { height: 46px; align-self: center; transition: height 0.4s ease; }
+    #main-nav.scrolled .nav-hope-text { height: 40px; }
 
     .nav-links { display: flex; gap: 26px; list-style: none; align-items: center; }
     .nav-links a {
@@ -901,34 +901,49 @@
     /* ─── NEW PATIENT PATHWAY ─────────────────────── */
     .section-newpatient { background: #fff; padding: 92px 80px; }
     .newpatient-inner { max-width: 1100px; margin: 0 auto; }
-    .newpatient-header { text-align: center; margin-bottom: 50px; }
+    .newpatient-header { text-align: center; margin-bottom: 44px; }
+    .newpatient-header .section-eyebrow { font-size: 12.5px; font-weight: 900; letter-spacing: 0.24em; }
     .newpatient-steps {
       display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 28px; margin-bottom: 52px;
+      gap: 32px; margin-bottom: 44px;
+      position: relative;
     }
-    .np-step { text-align: center; padding: 0 14px; }
+    /* Subtle connecting line between steps — desktop only */
+    .newpatient-steps::before {
+      content: '';
+      position: absolute;
+      top: 30px; left: 16.66%; right: 16.66%;
+      height: 1px;
+      background: linear-gradient(to right, rgba(27,62,122,0.05), rgba(27,62,122,0.18), rgba(27,62,122,0.05));
+      z-index: 0;
+    }
+    .np-step { text-align: center; padding: 0 14px; position: relative; z-index: 1; }
     .np-step-num {
-      width: 44px; height: 44px; border-radius: 50%;
+      width: 60px; height: 60px; border-radius: 50%;
       background: var(--navy); color: #fff;
       display: flex; align-items: center; justify-content: center;
-      font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 700;
-      margin: 0 auto 18px;
+      font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 700;
+      font-variant-numeric: lining-nums;
+      margin: 0 auto 22px;
+      box-shadow: 0 6px 14px rgba(27,62,122,0.2), 0 2px 5px rgba(27,62,122,0.13);
     }
+    .np-step-num span { display: inline-block; }
+    .np-step:nth-child(1) .np-step-num span { transform: translateX(1px); }
     .np-step h3 {
-      font-family: 'Cormorant Garamond', serif; font-size: 21px; font-weight: 600;
-      color: var(--navy); margin-bottom: 8px;
+      font-family: 'Cormorant Garamond', serif; font-size: 25px; font-weight: 600;
+      color: var(--navy); margin-bottom: 11px;
     }
-    .np-step p { font-size: 14.5px; line-height: 1.7; color: var(--text-body); }
+    .np-step p { font-size: 17px; line-height: 1.65; color: var(--text-body); }
     .newpatient-team {
-      display: flex; align-items: center; justify-content: center; gap: 16px;
+      display: flex; align-items: center; justify-content: center; gap: 18px;
       padding-top: 40px; border-top: 1px solid rgba(27,62,122,0.08);
       flex-wrap: wrap; text-align: center;
     }
     .np-avatars { display: flex; }
     .np-avatars img {
-      width: 50px; height: 50px; border-radius: 50%; object-fit: cover;
-      border: 3px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-      margin-left: -14px;
+      width: 59px; height: 59px; border-radius: 50%; object-fit: cover;
+      border: 3px solid #fff; box-shadow: 0 3px 10px rgba(0,0,0,0.16);
+      margin-left: -17px;
     }
     .np-avatars img:first-child { margin-left: 0; }
     .newpatient-team a {
@@ -1073,24 +1088,28 @@
     }
     .med-card h3 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 22px; font-weight: 600; color: var(--navy); margin-bottom: 10px;
+      font-size: 22px; font-weight: 600; color: var(--navy); margin-bottom: 14px;
     }
-    .med-card p {
-      font-size: 14.5px; line-height: 1.7; color: var(--text-body);
-      margin-bottom: 18px; flex-grow: 1;
+    .med-highlights {
+      list-style: none; margin: 0 0 16px; padding: 0;
+      display: flex; flex-direction: column; gap: 8px;
+      flex-grow: 1;
     }
-    .med-card-link {
-      font-size: 12.5px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--amber-dark); text-decoration: none;
-      display: inline-flex; align-items: center; gap: 6px;
-      transition: gap 0.2s ease, color 0.2s ease;
+    .med-highlights li {
+      font-size: 14px; line-height: 1.4; color: var(--text-body);
+      display: flex; align-items: flex-start; gap: 9px;
     }
-    .med-card-link:hover { gap: 10px; color: var(--amber); }
+    .med-highlights li::before {
+      content: ''; width: 5px; height: 5px; border-radius: 50%;
+      background: var(--card-color, var(--amber-dark));
+      margin-top: 7px; flex-shrink: 0;
+    }
     .med-emergency-note {
       font-size: 12.5px; font-weight: 700; color: var(--red);
       display: flex; align-items: center; gap: 6px;
-      margin-bottom: 16px;
+      margin: 0;
     }
+    .medical-cta { text-align: center; margin-top: 48px; }
 
     /* ─── FOOTER (expanded) ───────────────────────── */
     .footer-nav-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; flex: 1; }
@@ -1115,6 +1134,11 @@
       }
       .qa-card { min-width: 230px; scroll-snap-align: start; flex-shrink: 0; }
       .trust-grid, .medical-grid, .newpatient-steps { grid-template-columns: 1fr; }
+      .newpatient-steps { gap: 36px; margin-bottom: 36px; }
+      .newpatient-steps::before { display: none; }
+      .np-step-num { width: 51px; height: 51px; font-size: 21px; margin-bottom: 16px; }
+      .np-step h3 { font-size: 22px; }
+      .np-step p { font-size: 16px; }
       .footer-nav-cols { grid-template-columns: 1fr; gap: 28px; }
     }
 
@@ -1178,7 +1202,7 @@
   <nav id="main-nav" aria-label="Main navigation">
     <a href="#" aria-label="Hope Family Care Center home" class="nav-brand">
       <img src="./assets/Logo1tp.gif" alt="Hope Family Care Center" class="nav-logo">
-      <img src="./assets/hope_senlot_sans_condensed.gif" alt="hope" class="nav-hope-text">
+      <img src="./assets/HFCC.png" alt="Hope Family Care Center" class="nav-hope-text">
     </a>
     <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -1315,17 +1339,17 @@
       </div>
       <div class="newpatient-steps">
         <div class="np-step fade-up">
-          <div class="np-step-num" aria-hidden="true">1</div>
+          <div class="np-step-num" aria-hidden="true"><span>1</span></div>
           <h3>Schedule Your Visit</h3>
           <p>Book online, by phone, or just walk in — whatever's easiest for you.</p>
         </div>
         <div class="np-step fade-up d1">
-          <div class="np-step-num" aria-hidden="true">2</div>
+          <div class="np-step-num" aria-hidden="true"><span>2</span></div>
           <h3>Bring What You Have</h3>
           <p>ID and proof of income if you have them — but we'll never turn you away without.</p>
         </div>
         <div class="np-step fade-up d2">
-          <div class="np-step-num" aria-hidden="true">3</div>
+          <div class="np-step-num" aria-hidden="true"><span>3</span></div>
           <h3>Meet Your Care Team</h3>
           <p>Real, compassionate providers who see the whole you — body, mind, and spirit.</p>
         </div>
@@ -1565,66 +1589,70 @@
         <div class="med-card fade-up" style="--card-color:#2A7A2A; --card-tint:rgba(42,122,42,0.12);">
           <div class="med-icon-wrap" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
           <h3>Primary Care</h3>
-          <p>Comprehensive health care for adults — from routine checkups and preventive care to managing ongoing health concerns.</p>
-          <a href="services.html" class="med-card-link">Learn More <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          <ul class="med-highlights">
+            <li>Annual Wellness Exams</li>
+            <li>Preventive Screenings</li>
+            <li>Chronic Disease Management</li>
+          </ul>
         </div>
 
         <div class="med-card fade-up d1" style="--card-color:#C8680A; --card-tint:rgba(240,135,26,0.12);">
           <div class="med-icon-wrap" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg></div>
           <h3>Pediatrics</h3>
-          <p>Caring, gentle medical care for children from birth through adolescence, including well-child visits and immunizations.</p>
-          <a href="services.html" class="med-card-link">Learn More <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          <ul class="med-highlights">
+            <li>Newborn Care</li>
+            <li>Well-Child Visits</li>
+            <li>Immunizations &amp; Vaccines</li>
+          </ul>
         </div>
 
         <div class="med-card fade-up d2" style="--card-color:#9B2020; --card-tint:rgba(155,32,32,0.1);">
           <div class="med-icon-wrap" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M12 13v8M9 18h6"/></svg></div>
           <h3>Women's Health</h3>
-          <p>Dedicated care for women at every stage of life — annual exams, family planning, prenatal guidance, and preventive screenings.</p>
-          <a href="services.html" class="med-card-link">Learn More <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          <ul class="med-highlights">
+            <li>Annual Gynecologic Exams</li>
+            <li>Family Planning</li>
+            <li>Prenatal Guidance</li>
+          </ul>
         </div>
 
         <div class="med-card fade-up d3" style="--card-color:#C8680A; --card-tint:rgba(200,104,10,0.13);">
           <div class="med-icon-wrap" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
           <h3>Urgent Care</h3>
-          <p>Same-day care for non-emergency illnesses and injuries when you can't wait for a scheduled appointment.</p>
+          <ul class="med-highlights">
+            <li>Same-Day Appointments</li>
+            <li>Minor Injuries &amp; Illness</li>
+            <li>Rapid Diagnostic Tests</li>
+          </ul>
           <p class="med-emergency-note"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>For life-threatening emergencies, call 911.</p>
-          <a href="services.html" class="med-card-link">Learn More <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
         </div>
 
-        <div class="med-card fade-up d4" style="--card-color:#1E4FA3; --card-tint:rgba(30,79,163,0.11);">
-          <div class="med-icon-wrap" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-          <h3>Chronic Disease Management</h3>
-          <p>Ongoing management of conditions like diabetes, hypertension, asthma, and heart disease to help you live a fuller, healthier life.</p>
-          <a href="services.html" class="med-card-link">Learn More <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-        </div>
-
-        <div class="med-card fade-up" style="--card-color:#4A2D7A; --card-tint:rgba(74,45,122,0.11);">
-          <div class="med-icon-wrap" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-          <h3>Dermatology</h3>
-          <p>Diagnosis and treatment of skin conditions including acne, eczema, rashes, and other concerns for all ages.</p>
-          <a href="services.html" class="med-card-link">Learn More <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-        </div>
-
-        <div class="med-card fade-up d1" style="--card-color:#1E4FA3; --card-tint:rgba(30,79,163,0.11);">
-          <div class="med-icon-wrap" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-          <h3>Social Services</h3>
-          <p>Our social workers connect you with housing, food, transportation, benefits enrollment, and community resources.</p>
-          <a href="services.html" class="med-card-link">Learn More <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-        </div>
-
-        <div class="med-card fade-up d2" style="--card-color:#C8680A; --card-tint:rgba(240,135,26,0.12);">
+        <div class="med-card fade-up d4" style="--card-color:#C8680A; --card-tint:rgba(240,135,26,0.12);">
           <div class="med-icon-wrap" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v11m0 0H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-4m-6 0h6"/></svg></div>
           <h3>Laboratory Services</h3>
-          <p>Convenient on-site laboratory services for blood work, urinalysis, and other diagnostic tests with fast turnaround times.</p>
-          <a href="services.html" class="med-card-link">Learn More <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          <ul class="med-highlights">
+            <li>Blood Work &amp; CBC</li>
+            <li>Metabolic Panels</li>
+            <li>Rapid Strep &amp; Flu Tests</li>
+          </ul>
         </div>
 
-        <div class="med-card fade-up d3" style="--card-color:#2A7A2A; --card-tint:rgba(42,122,42,0.12);">
-          <div class="med-icon-wrap" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg></div>
-          <h3>Immunizations</h3>
-          <p>Up-to-date vaccinations for children and adults, following the latest public health guidelines to keep our community safe.</p>
-          <a href="services.html" class="med-card-link">Learn More <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <div class="med-card fade-up" style="--card-color:#1E4FA3; --card-tint:rgba(30,79,163,0.11);">
+          <div class="med-icon-wrap" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <h3>Social Services</h3>
+          <ul class="med-highlights">
+            <li>Food Assistance</li>
+            <li>Housing Support</li>
+            <li>Benefits Enrollment</li>
+          </ul>
         </div>
+      </div>
+
+      <div class="medical-cta fade-up">
+        <a href="services.html" class="btn-amber">
+          View All Medical Services
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
       </div>
     </div>
   </section>

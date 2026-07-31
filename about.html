@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Us — Hope Family Care Center</title>
+  <link rel="icon" type="image/gif" href="./assets/Logo1tp.gif">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -49,6 +50,24 @@
       z-index: 10;
     }
 
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+    }
+    .skip-link {
+      position: absolute; left: 12px; top: -60px; z-index: 300;
+      background: var(--navy); color: #fff;
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px; font-weight: 800; letter-spacing: 0.04em;
+      padding: 12px 20px; border-radius: 0 0 6px 6px; text-decoration: none;
+      transition: top 0.2s ease;
+    }
+    .skip-link:focus { top: 0; }
+    [tabindex="-1"]:focus { outline: none; }
+    .nav-toggle:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; border-radius: 4px; }
+    .mob-close:focus-visible { outline: 2px solid var(--amber); outline-offset: -2px; border-radius: 6px; }
+
     /* ─── NAV ────────────────────────────────────── */
     #main-nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
@@ -65,11 +84,12 @@
     .nav-brand { display: flex; align-items: center; gap: 10px; }
     .nav-hope-text { height: 46px; align-self: center; }
 
-    .nav-links { display: flex; gap: 26px; list-style: none; align-items: center; }
+    .nav-links { display: flex; gap: 20px; list-style: none; align-items: center; }
     .nav-links a {
       white-space: nowrap;
-      font-size: 12.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
       color: rgba(26,26,26,0.72); text-decoration: none;
+      display: inline-flex; align-items: center; min-height: 40px;
       transition: color 0.2s ease;
     }
     .nav-links a:hover { color: var(--amber); }
@@ -79,10 +99,11 @@
     .nav-cta {
       background: var(--amber) !important;
       color: #fff !important;
-      padding: 9px 20px;
+      padding: 9px 18px;
       border-radius: 5px;
       font-weight: 800 !important;
-      font-size: 12.5px !important;
+      font-size: 12px !important;
+      letter-spacing: 0.07em !important;
       box-shadow: 0 2px 12px rgba(240,135,26,0.35);
       transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease !important;
     }
@@ -108,7 +129,7 @@
     .nav-donate {
       background: transparent !important;
       color: var(--red) !important;
-      padding: 7.5px 16px !important;
+      padding: 7.5px 15px !important; font-size: 12px !important;
       border-radius: 5px;
       font-weight: 700 !important;
       letter-spacing: 0.06em !important;
@@ -150,8 +171,10 @@
     }
     body.nav-open .mob-panel { transform: translateX(0); }
     .mob-close {
-      position: absolute; top: 18px; right: 18px;
-      background: none; border: none; cursor: pointer; padding: 8px;
+      position: absolute; top: 12px; right: 12px;
+      width: 46px; height: 46px;
+      display: flex; align-items: center; justify-content: center;
+      background: none; border: none; cursor: pointer; padding: 0;
       color: rgba(255,255,255,0.7); line-height: 1;
       transition: color 0.2s ease;
     }
@@ -162,7 +185,8 @@
     }
     #mob-nav .nav-links li { width: 100%; }
     #mob-nav .nav-links li a {
-      display: block !important; padding: 15px 28px;
+      display: flex !important; align-items: center; min-height: 52px;
+      padding: 15px 28px;
       font-size: 12.5px !important; letter-spacing: 0.12em;
       color: rgba(255,255,255,0.82) !important; text-transform: uppercase;
       border-bottom: 1px solid rgba(255,255,255,0.07);
@@ -172,16 +196,21 @@
     #mob-nav .nav-links .nav-phone { display: flex !important; align-items: center; gap: 8px; text-transform: none !important; font-size: 13px !important; }
     #mob-nav .nav-links .nav-cta { display: block !important; margin: 20px 28px 6px; padding: 12px 24px !important; font-size: 12px !important; text-align: center; border-bottom: none !important; border-radius: 5px; }
     #mob-nav .nav-links .nav-donate { display: block !important; margin: 0 28px 20px; padding: 12px 24px !important; font-size: 12px !important; text-align: center; border-bottom: none !important; border-radius: 5px; }
+    #mob-nav .nav-links .nav-cta,
+    #mob-nav .nav-links .nav-donate {
+      white-space: normal; line-height: 1.35;
+      padding: 14px 16px !important; font-size: 11.5px !important;
+    }
     @media (max-width: 1400px) {
       /* Hamburger button */
       .nav-toggle {
         display: flex; flex-direction: column; justify-content: center;
         gap: 5px; background: none; border: none; cursor: pointer;
-        padding: 6px; z-index: 1001;
+        align-items: center; width: 46px; height: 46px; padding: 0; z-index: 1001;
       }
       .nav-toggle span {
         display: block; width: 22px; height: 2px;
-        background: rgba(255,255,255,0.9); border-radius: 2px;
+        background: var(--navy); border-radius: 2px;
         transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease;
         transform-origin: center;
       }
@@ -315,10 +344,148 @@
     }
     .section-title em { font-style: italic; color: var(--amber-dark); }
 
+    /* ─── MISSION, VISION & VALUES ───────────────── */
+    .section-mvv {
+      background: var(--cream);
+      padding: 84px 0 76px;
+    }
+    .mvv-header { max-width: 620px; margin-bottom: 44px; }
+    .mvv-header .section-title { margin-bottom: 0; }
+
+    /* Mission is the wider, darker panel — it carries the most weight. */
+    .mvv-panels {
+      display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
+      gap: 26px; align-items: stretch;
+      margin-bottom: 26px;
+    }
+    .mvv-panel {
+      border-radius: 14px;
+      padding: 40px 42px;
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column;
+    }
+    .mvv-panel-label {
+      font-family: 'Nunito', sans-serif;
+      font-size: 11px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase;
+      margin-bottom: 18px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .mvv-panel-label::before {
+      content: ''; width: 30px; height: 2px; display: inline-block;
+      background: currentColor; opacity: 0.85;
+    }
+
+    .mvv-mission {
+      background: var(--navy); color: #fff;
+      justify-content: center;
+      box-shadow: 0 16px 44px rgba(27,62,122,0.22), 0 2px 6px rgba(27,62,122,0.14);
+    }
+    .mvv-mission::after {
+      content: '';
+      position: absolute; right: -90px; bottom: -110px;
+      width: 300px; height: 300px; border-radius: 50%;
+      border: 40px solid var(--amber); opacity: 0.07;
+      pointer-events: none;
+    }
+    .mvv-mission .mvv-panel-label { color: var(--amber); }
+    .mvv-mission p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(27px, 3.2vw, 38px);
+      font-weight: 400; font-style: italic; line-height: 1.32;
+      color: #fff; letter-spacing: -0.01em;
+      position: relative; z-index: 1;
+    }
+
+    .mvv-vision {
+      background: #fff;
+      border: 1px solid rgba(27,62,122,0.1);
+      box-shadow: 0 6px 26px rgba(27,62,122,0.06);
+    }
+    .mvv-vision .mvv-panel-label { color: var(--amber-dark); }
+    .mvv-vision p {
+      font-size: 17.5px; line-height: 1.75; color: var(--text-body);
+    }
+
+    .mvv-values {
+      background: #fff;
+      border: 1px solid rgba(27,62,122,0.1);
+      border-radius: 14px;
+      padding: 30px 34px;
+      display: grid;
+      grid-template-columns: auto repeat(5, minmax(0, 1fr));
+      align-items: center; gap: 10px 26px;
+      box-shadow: 0 6px 26px rgba(27,62,122,0.06);
+    }
+    .mvv-values-label {
+      font-family: 'Nunito', sans-serif;
+      font-size: 11px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--amber-dark);
+      padding-right: 26px;
+      border-right: 1px solid rgba(27,62,122,0.12);
+      align-self: stretch; display: flex; align-items: center;
+    }
+    .mvv-value {
+      display: flex; align-items: center; gap: 10px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 15px; font-weight: 700; line-height: 1.3;
+      color: var(--navy);
+    }
+    .mvv-value svg { flex-shrink: 0; color: var(--card-color, var(--amber-dark)); }
+
+    /* ─── SERVICE AREA ───────────────────────────── */
+    .section-area {
+      background: var(--cream-dark);
+      padding: 80px 0;
+    }
+    .area-inner { max-width: 900px; }
+    .area-inner .section-title { margin-bottom: 18px; }
+    .area-sub {
+      font-size: 17px; line-height: 1.8; color: var(--text-body);
+      margin-bottom: 30px; max-width: 660px;
+    }
+    .area-points {
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px; margin-bottom: 26px;
+    }
+    .area-point {
+      display: flex; gap: 14px; align-items: flex-start;
+      background: #fff; border: 1px solid rgba(27,62,122,0.1);
+      border-radius: 12px; padding: 20px 22px;
+      box-shadow: 0 4px 18px rgba(27,62,122,0.05);
+    }
+    .area-point-icon {
+      width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(240,135,26,0.12); color: var(--amber-dark);
+    }
+    .area-point p { font-size: 16px; line-height: 1.65; color: var(--text-body); }
+    @media (max-width: 700px) { .area-points { grid-template-columns: 1fr; } }
+    .area-note { font-size: 16px; line-height: 1.7; color: var(--text-body); }
+    .area-link {
+      color: var(--amber-dark); font-weight: 800; text-decoration: none;
+      border-bottom: 1px solid rgba(200,104,10,0.35);
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .area-link:hover { color: var(--amber); border-color: var(--amber); }
+    .area-link:focus-visible { outline: 2px solid var(--amber-dark); outline-offset: 3px; border-radius: 2px; }
+
+    @media (max-width: 1024px) {
+      .mvv-panels { grid-template-columns: 1fr; }
+      .mvv-values { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px 22px; }
+      .mvv-values-label { grid-column: 1 / -1; border-right: none; padding-right: 0; padding-bottom: 4px; }
+    }
+    @media (max-width: 600px) {
+      .mvv-panel { padding: 30px 26px; }
+      .mvv-values { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 24px 22px; }
+    }
+    @media (max-width: 380px) {
+      .mvv-values { grid-template-columns: 1fr; }
+    }
+
     /* ─── WHO WE ARE ─────────────────────────────── */
     .section-who {
       background: var(--cream);
-      padding: 100px 0;
+      padding: 84px 0;
     }
     .who-grid {
       display: grid; grid-template-columns: 1fr 1fr;
@@ -367,7 +534,7 @@
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
-    .pillar-text h4 {
+    .pillar-text h3 {
       font-family: 'Cormorant Garamond', serif;
       font-size: 19px; font-weight: 700;
       color: var(--navy); margin: 0 0 5px;
@@ -483,7 +650,7 @@
       font-size: 10.5px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase;
       color: var(--amber); margin-bottom: 6px;
     }
-    .timeline-item h4 {
+    .timeline-item h3 {
       font-family: 'Cormorant Garamond', serif;
       font-size: 22px; font-weight: 700;
       color: var(--navy); margin: 0 0 8px; line-height: 1.2;
@@ -525,7 +692,7 @@
       display: flex; align-items: center; justify-content: center;
       margin-bottom: 18px;
     }
-    .accomplish-card h4 {
+    .accomplish-card h3 {
       font-family: 'Cormorant Garamond', serif;
       font-size: 20px; font-weight: 700;
       color: var(--navy); margin: 0 0 8px; line-height: 1.25;
@@ -647,17 +814,17 @@
     }
     .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
     .footer-col a {
-      font-size: 14px; color: rgba(255,255,255,0.45); text-decoration: none;
+      font-size: 15px; color: rgba(255,255,255,0.68); text-decoration: none;
       font-family: 'Nunito', sans-serif;
       transition: color 0.2s ease;
     }
-    .footer-col a:hover { color: rgba(255,255,255,0.85); }
+    .footer-col a:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
     .footer-bottom {
       display: flex; justify-content: space-between;
       align-items: center; flex-wrap: wrap; gap: 16px;
     }
     .footer-copy {
-      font-size: 12.5px; color: rgba(255,255,255,0.25);
+      font-size: 13.5px; color: rgba(255,255,255,0.58);
       font-family: 'Nunito', sans-serif;
     }
     .footer-dots { display: flex; gap: 6px; align-items: center; }
@@ -705,6 +872,12 @@
     }
     @media (max-width: 560px) {
       .accomplish-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Body copy stays >= 16px on phones (accessibility pass) */
+    @media (max-width: 768px) {
+      .program-card p, .pillar-text p, .timeline-item p, .accomplish-card p { font-size: 16px; line-height: 1.7; }
+      .timeline-year { font-size: 16px; }
     }
 
     /* ─── GOOGLE TRANSLATE ───────────────────────── */
@@ -756,6 +929,9 @@
 
     /* Mobile — hide translate in the drawer (widget can't duplicate) */
     #mob-nav .nav-translate-item { display: none !important; }
+
+    body > .VIpgJd-ZVi9od-aZ2wEe-wOHMyf,
+    body > .skiptranslate { display: none !important; }
   </style>
 </head>
 
@@ -764,6 +940,8 @@
   <!-- ══════════════════════════════════════════════
        NAV
   ══════════════════════════════════════════════ -->
+  <a class="skip-link" href="#main">Skip to main content</a>
+
   <nav id="main-nav" aria-label="Main navigation">
     <a href="index.html" aria-label="Hope Family Care Center home" class="nav-brand">
       <img src="./assets/Logo1tp.gif" alt="Hope Family Care Center" class="nav-logo">
@@ -774,8 +952,8 @@
     </button>
     <ul class="nav-links">
       <li><a href="about.html" class="active">About</a></li>
-      <li><a href="team.html">Team</a></li>
       <li><a href="services.html">Services</a></li>
+      <li><a href="team.html">Team</a></li>
       <li><a href="volunteer.html">Volunteer</a></li>
       <li><a href="index.html#contact">Contact</a></li>
       <li class="nav-translate-item">
@@ -783,7 +961,7 @@
       </li>
       <li><a href="tel:+18168616500" class="nav-phone" aria-label="Call us at (816) 861-6500"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 012 2.18 2 2 0 013.17 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>(816) 861-6500</a></li>
       <li><a href="donate.html" class="nav-donate">Donate</a></li>
-      <li><a href="https://healow.com/apps/practice/hope-family-care-center-5775?v=2&locale=en" target="_blank" rel="noopener noreferrer" class="nav-cta">Schedule Visit</a></li>
+      <li><a href="https://healow.com/apps/practice/hope-family-care-center-5775?v=2&locale=en" target="_blank" rel="noopener noreferrer" class="nav-cta">Schedule an Appointment<span class="sr-only"> (opens in a new tab on healow.com)</span></a></li>
     </ul>
   </nav>
   <div id="mob-nav" aria-hidden="true"></div>
@@ -791,7 +969,7 @@
   <!-- ══════════════════════════════════════════════
        PAGE HERO
   ══════════════════════════════════════════════ -->
-  <section class="page-hero grain" aria-label="About Us">
+  <section id="main" tabindex="-1" class="page-hero grain" aria-label="About Us">
     <!-- Background arc decorations -->
     <svg class="page-hero-arc" viewBox="0 0 500 500" fill="none" aria-hidden="true">
       <path d="M 480 480 Q 480 50 50 50" stroke="#F0871A" stroke-width="28" fill="none" stroke-linecap="round"/>
@@ -813,7 +991,7 @@
           <strong>Loving Others.</strong>
         </h1>
         <p class="page-hero-desc">
-          We know how hard it can be to find a place to live, get food on the table, or access the medical care you need. That's exactly why we're here — to bring hope to Kansas City's East Side community, one family at a time.
+          Many people in our community face barriers to housing, transportation, food, and medical care. That's exactly why we're here — to bring hope to Kansas City's east side, one family at a time.
         </p>
       </div>
       <div>
@@ -846,6 +1024,53 @@
   </div>
 
   <!-- ══════════════════════════════════════════════
+       MISSION, VISION & VALUES
+  ══════════════════════════════════════════════ -->
+  <section class="section-mvv" id="mission" aria-labelledby="mvv-heading">
+    <div class="container">
+      <div class="mvv-header">
+        <div class="section-eyebrow fade-up">What Guides Us</div>
+        <h2 class="section-title fade-up d1" id="mvv-heading">Our Mission, Vision &amp; <em>Values</em></h2>
+      </div>
+
+      <div class="mvv-panels">
+        <div class="mvv-panel mvv-mission fade-up d1">
+          <div class="mvv-panel-label">Mission</div>
+          <p>To honor God by providing quality, personal health care.</p>
+        </div>
+        <div class="mvv-panel mvv-vision fade-up d2">
+          <div class="mvv-panel-label">Vision</div>
+          <p>We envision a day when all residents of our east side community receive high-quality, preventive, and personal health care regardless of income&mdash;contributing to the transformation and overall well-being of the community.</p>
+        </div>
+      </div>
+
+      <div class="mvv-values fade-up d3">
+        <div class="mvv-values-label">Values</div>
+        <div class="mvv-value" style="--card-color:#9B2020;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+          Respect and Dignity
+        </div>
+        <div class="mvv-value" style="--card-color:#2A7A2A;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16 9"/></svg>
+          Quality Care
+        </div>
+        <div class="mvv-value" style="--card-color:#C8680A;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>
+          Relationship-Centered
+        </div>
+        <div class="mvv-value" style="--card-color:#1E4FA3;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-9"/></svg>
+          Community-Focused
+        </div>
+        <div class="mvv-value" style="--card-color:#4A2D7A;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Faith-Driven
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
        WHO WE ARE
   ══════════════════════════════════════════════ -->
   <section class="section-who" id="about" aria-labelledby="who-heading">
@@ -859,13 +1084,13 @@
             A Community of Care in<br>Kansas City's <em>East Side</em>
           </h2>
           <p class="fade-up d2">
-            We know many of you in Kansas City face real challenges — finding stable housing, reliable transportation, enough food, and access to quality medical care. At Hope Family Care Center, we're here to help on all fronts.
+            Many people in our community face barriers to stable housing, reliable transportation, enough food, and quality medical care. HOPE is here to walk alongside you and connect you with practical support.
           </p>
           <p class="fade-up d2">
-            Our team personally connects with every patient. We don't just treat your health — we get to know you, speak your language, and walk alongside you. We help you keep appointments, manage medications, and make sustainable lifestyle changes that lead to a happier, healthier life.
+            Our team personally connects with every patient. We don't just treat your health — we get to know you, speak your language, and stay with you. We help you keep appointments, manage medications, and make sustainable changes that lead to a healthier life.
           </p>
           <p class="fade-up d2">
-            We also connect you with social workers and community resources so that your whole life, not just your health, can move forward.
+            We also connect you with social workers and trusted community organizations so that your whole life, not just your health, can move forward.
           </p>
 
           <div class="scripture-pull fade-up d3">
@@ -884,8 +1109,8 @@
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2A7A2A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
               </div>
               <div class="pillar-text">
-                <h4>Medical Care for Every Need</h4>
-                <p>Same-day or next-day appointments, affordable prices, professional staff, and a family-practice model that actually knows your name.</p>
+                <h3>Medical Care for Every Need</h3>
+                <p>Same-day and next-day appointments are often available — walk-ins welcome during clinic hours — at affordable prices, from a family-practice team that knows your name.</p>
               </div>
             </div>
 
@@ -894,8 +1119,8 @@
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4A2D7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
               </div>
               <div class="pillar-text">
-                <h4>Social Services &amp; Resources</h4>
-                <p>Connect with housing assistance, food programs, transportation help, language services, and social workers who advocate for you.</p>
+                <h3>Social Services &amp; Resources</h3>
+                <p>Our social workers help you apply for benefits and connect you with trusted local organizations for housing, food, and transportation.</p>
               </div>
             </div>
 
@@ -904,7 +1129,7 @@
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C8680A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               </div>
               <div class="pillar-text">
-                <h4>Faith-Centered, Patient-First</h4>
+                <h3>Faith-Centered, Patient-First</h3>
                 <p>Our faith-based approach means we see each patient as a whole person — body, mind, and spirit — and serve with genuine compassion.</p>
               </div>
             </div>
@@ -914,8 +1139,8 @@
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1E4FA3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
               </div>
               <div class="pillar-text">
-                <h4>Quick Access, No Long Waits</h4>
-                <p>We get you seen the same day or within 24 hours — because when you need care, waiting weeks isn't an option.</p>
+                <h3>Quick Access, No Long Waits</h3>
+                <p>Same-day and next-day appointments are often available, and walk-ins are welcome Monday–Friday during clinic hours — because when you need care, waiting weeks isn't an option.</p>
               </div>
             </div>
 
@@ -973,7 +1198,7 @@
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F0871A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
           </div>
           <h3>Community Wraparound Services</h3>
-          <p>From food and housing to transportation and language assistance, our social workers help you navigate the resources you need to stabilize and thrive — not just survive.</p>
+          <p>From food and housing to transportation and language assistance, our social workers help you navigate and reach the community resources you need — connecting you with the organizations that provide them.</p>
         </div>
 
         <div class="program-card fade-up d3" style="--card-color: #4A2D7A;">
@@ -1016,36 +1241,36 @@
         <div class="timeline-item fade-up">
           <div class="timeline-dot"></div>
           <p class="timeline-year">1998</p>
-          <h4>Humble Beginnings</h4>
+          <h3>Humble Beginnings</h3>
           <p>Hope Family Care Center began as a youth outreach program in eastern Kansas City, driven by a vision for the holistic development of the community.</p>
         </div>
 
         <div class="timeline-item fade-up d1">
           <div class="timeline-dot" style="background:var(--red);box-shadow:0 0 0 3px var(--red);"></div>
           <p class="timeline-year" style="color:var(--red);">2006</p>
-          <h4>Strategic Vision Expands</h4>
+          <h3>Strategic Vision Expands</h3>
           <p>The HFCC Board embarked on a strategic planning process to expand the organization's impact — identifying accessible medical care as a pressing and unmet need in the area.</p>
         </div>
 
         <div class="timeline-item fade-up d2">
           <div class="timeline-dot" style="background:var(--blue);box-shadow:0 0 0 3px var(--blue);"></div>
           <p class="timeline-year" style="color:var(--blue);">2013</p>
-          <h4>Health Center Transformation</h4>
+          <h3>Health Center Transformation</h3>
           <p>HFCC recognized the need to strengthen the structure and function of its health center and began pursuing Federally Qualified Community Health Center (FQHC) Look-Alike status.</p>
         </div>
 
         <div class="timeline-item fade-up d3">
           <div class="timeline-dot" style="background:var(--purple);box-shadow:0 0 0 3px var(--purple);"></div>
           <p class="timeline-year" style="color:var(--purple);">2015</p>
-          <h4>FQHC Look-Alike Status Achieved</h4>
+          <h3>FQHC Look-Alike Status Achieved</h3>
           <p>In October 2015, HFCC successfully attained its FQHC Look-Alike designation — a landmark milestone that brought expanded access, resources, and hope to the underserved community.</p>
         </div>
 
         <div class="timeline-item timeline-today fade-up d4">
           <div class="timeline-dot" style="background:var(--green);box-shadow:0 0 0 3px var(--green);"></div>
           <p class="timeline-year" style="color:var(--green);">Today</p>
-          <h4>Serving Our East Side KC Community</h4>
-          <p>HFCC continues to operate exclusively on grants, donations, and patient revenue — ensuring every member of our East Side Kansas City community has access to exceptional, preventative, personal health care, regardless of income.</p>
+          <h3>Serving Our East Side KC Community</h3>
+          <p>HFCC continues to operate on grants, donations, and patient revenue — ensuring every member of our East Side Kansas City community has access to exceptional, preventative, personal health care, regardless of income.</p>
         </div>
 
       </div>
@@ -1068,7 +1293,7 @@
           <div class="accomplish-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2A7A2A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
           </div>
-          <h4>Faith-Based, Patient-Centered Model</h4>
+          <h3>Faith-Based, Patient-Centered Model</h3>
           <p>A unique patient experience rooted in faith and genuine connection — creating a care model that truly serves the urban community we call home.</p>
         </div>
 
@@ -1076,7 +1301,7 @@
           <div class="accomplish-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2A7A2A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </div>
-          <h4>A Culture of Teamwork</h4>
+          <h3>A Culture of Teamwork</h3>
           <p>Our staff's deep commitment to the mission drives a collaborative approach that patients feel the moment they walk in the door.</p>
         </div>
 
@@ -1084,15 +1309,15 @@
           <div class="accomplish-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2A7A2A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
           </div>
-          <h4>Same-Day Access</h4>
-          <p>Professional, quality services the same day or within 24 hours — at an accessible location with convenient hours and affordable prices.</p>
+          <h3>Same-Day Access</h3>
+          <p>Professional, quality services with same-day and next-day appointments often available — at an accessible location with affordable prices.</p>
         </div>
 
         <div class="accomplish-card fade-up d3">
           <div class="accomplish-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2A7A2A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
           </div>
-          <h4>Grant Funding &amp; Financial Sustainability</h4>
+          <h3>Grant Funding &amp; Financial Sustainability</h3>
           <p>HFCC has successfully secured grant funding to expand services and continues to operate on grants, donations, and patient revenue.</p>
         </div>
 
@@ -1100,7 +1325,7 @@
           <div class="accomplish-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2A7A2A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
-          <h4>FQHC Look-Alike Status</h4>
+          <h3>FQHC Look-Alike Status</h3>
           <p>Achieved in 2015 — a significant milestone that brought expanded access and resources to the underserved community we serve every day.</p>
         </div>
 
@@ -1108,7 +1333,7 @@
           <div class="accomplish-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2A7A2A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
           </div>
-          <h4>Comprehensive Transformation</h4>
+          <h3>Comprehensive Transformation</h3>
           <p>Our goal is not just better health outcomes — it's a comprehensive transformation that enhances the overall well-being of our entire East Side KC community.</p>
         </div>
 
@@ -1124,6 +1349,34 @@
     <span style="background:#9B2020;"></span>
     <span style="background:#F0871A;"></span>
   </div>
+
+  <!-- ══════════════════════════════════════════════
+       SERVICE AREA
+  ══════════════════════════════════════════════ -->
+  <section class="section-area" id="service-area" aria-labelledby="area-heading">
+    <div class="container">
+      <div class="area-inner">
+        <div class="section-eyebrow fade-up">Who We Serve</div>
+        <h2 class="section-title fade-up d1" id="area-heading">Our <em>Service Area</em></h2>
+        <p class="area-sub fade-up d2">
+          Our clinic sits on Prospect Avenue, and our patients come to us from more than 50 ZIP codes across Kansas City's east side and the surrounding communities.
+        </p>
+        <div class="area-points fade-up d3">
+          <div class="area-point">
+            <div class="area-point-icon" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <p>Kansas City's east side is our home, and the neighborhoods around it are where most of our patients live.</p>
+          </div>
+          <div class="area-point">
+            <div class="area-point-icon" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+            <p>There is no ZIP code test at our front desk. Where you live does not decide whether we will see you.</p>
+          </div>
+        </div>
+        <p class="area-note fade-up d4">
+          Not sure whether we can help? Call <a href="tel:+18168616500" class="area-link">(816) 861-6500</a> and our staff will walk through it with you.
+        </p>
+      </div>
+    </div>
+  </section>
 
   <!-- ══════════════════════════════════════════════
        DONATE CTA
@@ -1143,9 +1396,9 @@
           HFCC is a faith-based 501(c)(3) organization providing affordable, high-quality care to the underprivileged in Kansas City. Every gift helps us reach further, serve more families, and bring real hope to those who need it most.
         </p>
         <div class="cta-btns fade-up d3">
-          <a href="index.html#contact" class="btn-white">
+          <a href="donate.html" class="btn-white">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            Partner With Us Today
+            Give to HOPE
           </a>
         </div>
         <div class="scripture-cta fade-up d4">
@@ -1163,21 +1416,21 @@
     <div class="container">
       <div class="info-grid">
         <div class="info-item fade-up">
-          <div class="info-icon-box" aria-hidden="true">📍</div>
+          <div class="info-icon-box" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
           <div>
             <div class="info-label">Location</div>
             <div class="info-value">3027 Prospect Avenue<br>Kansas City, MO 64128</div>
           </div>
         </div>
         <div class="info-item fade-up d1">
-          <div class="info-icon-box" aria-hidden="true">🕐</div>
+          <div class="info-icon-box" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 2"/></svg></div>
           <div>
             <div class="info-label">Hours</div>
             <div class="info-value">Monday – Friday<br>8:00 AM – 5:00 PM</div>
           </div>
         </div>
         <div class="info-item fade-up d2">
-          <div class="info-icon-box" aria-hidden="true">🌐</div>
+          <div class="info-icon-box" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a13 13 0 0 1 0 18 13 13 0 0 1 0-18z"/></svg></div>
           <div>
             <div class="info-label">Languages</div>
             <div class="info-value">English &amp; Spanish spoken.<br>All are welcome here.</div>
@@ -1202,25 +1455,33 @@
             <div class="footer-col-head">Navigate</div>
             <ul>
               <li><a href="index.html">Home</a></li>
-              <li><a href="about.html">About Us</a></li>
               <li><a href="services.html">Services</a></li>
+              <li><a href="team.html">Our Team</a></li>
+              <li><a href="#service-area">Service Area</a></li>
               <li><a href="index.html#contact">Contact</a></li>
             </ul>
           </div>
           <div class="footer-col">
-            <div class="footer-col-head">Programs</div>
+            <div class="footer-col-head">On This Page</div>
             <ul>
-              <li><a href="#programs">COVID-19 Care</a></li>
-              <li><a href="#programs">Chronic Disease</a></li>
-              <li><a href="#programs">Wraparound Services</a></li>
-              <li><a href="#programs">Medication Support</a></li>
+              <li><a href="#mission">Mission, Vision &amp; Values</a></li>
+              <li><a href="#programs">Our Programs</a></li>
+              <li><a href="#history">Our Beginnings</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <div class="footer-col-head">Get Involved</div>
+            <ul>
+              <li><a href="donate.html">Donate</a></li>
+              <li><a href="volunteer.html">Volunteer</a></li>
+              <li><a href="mailto:admin@hfcckc.org?subject=Careers%20at%20Hope%20Family%20Care%20Center">Careers</a></li>
             </ul>
           </div>
         </nav>
       </div>
 
       <div class="footer-bottom">
-        <p class="footer-copy">© 2026 Hope Family Care Center. All rights reserved. Kansas City, MO · Serving 24 Zip Codes.</p>
+        <p class="footer-copy">© 2026 Hope Family Care Center. All rights reserved. Kansas City, MO · Serving 50+ ZIP codes.</p>
         <div class="footer-dots" aria-hidden="true">
           <span class="footer-dot" style="background:#F0871A;"></span>
           <span class="footer-dot" style="background:#9B2020;"></span>

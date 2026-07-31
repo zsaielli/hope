@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Patient Services — Hope Family Care Center</title>
+  <link rel="icon" type="image/gif" href="./assets/Logo1tp.gif">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -49,6 +50,24 @@
       z-index: 10;
     }
 
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+    }
+    .skip-link {
+      position: absolute; left: 12px; top: -60px; z-index: 300;
+      background: var(--navy); color: #fff;
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px; font-weight: 800; letter-spacing: 0.04em;
+      padding: 12px 20px; border-radius: 0 0 6px 6px; text-decoration: none;
+      transition: top 0.2s ease;
+    }
+    .skip-link:focus { top: 0; }
+    [tabindex="-1"]:focus { outline: none; }
+    .nav-toggle:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; border-radius: 4px; }
+    .mob-close:focus-visible { outline: 2px solid var(--amber); outline-offset: -2px; border-radius: 6px; }
+
     /* ─── NAV ────────────────────────────────────── */
     #main-nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
@@ -63,11 +82,12 @@
     .nav-logo { height: 48px; }
     .nav-brand { display: flex; align-items: center; gap: 10px; }
     .nav-hope-text { height: 46px; align-self: center; }
-    .nav-links { display: flex; gap: 26px; list-style: none; align-items: center; }
+    .nav-links { display: flex; gap: 20px; list-style: none; align-items: center; }
     .nav-links a {
       white-space: nowrap;
-      font-size: 12.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
       color: rgba(26,26,26,0.72); text-decoration: none;
+      display: inline-flex; align-items: center; min-height: 40px;
       transition: color 0.2s ease;
     }
     .nav-links a:hover { color: var(--amber); }
@@ -76,10 +96,11 @@
     .nav-cta {
       background: var(--amber) !important;
       color: #fff !important;
-      padding: 9px 20px;
+      padding: 9px 18px;
       border-radius: 5px;
       font-weight: 800 !important;
-      font-size: 12.5px !important;
+      font-size: 12px !important;
+      letter-spacing: 0.07em !important;
       box-shadow: 0 2px 12px rgba(240,135,26,0.35);
       transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease !important;
     }
@@ -104,7 +125,7 @@
     .nav-donate {
       background: transparent !important;
       color: var(--red) !important;
-      padding: 7.5px 16px !important;
+      padding: 7.5px 15px !important; font-size: 12px !important;
       border-radius: 5px;
       font-weight: 700 !important;
       letter-spacing: 0.06em !important;
@@ -147,8 +168,10 @@
     }
     body.nav-open .mob-panel { transform: translateX(0); }
     .mob-close {
-      position: absolute; top: 18px; right: 18px;
-      background: none; border: none; cursor: pointer; padding: 8px;
+      position: absolute; top: 12px; right: 12px;
+      width: 46px; height: 46px;
+      display: flex; align-items: center; justify-content: center;
+      background: none; border: none; cursor: pointer; padding: 0;
       color: rgba(255,255,255,0.7); line-height: 1;
       transition: color 0.2s ease;
     }
@@ -159,7 +182,8 @@
     }
     #mob-nav .nav-links li { width: 100%; }
     #mob-nav .nav-links li a {
-      display: block !important; padding: 15px 28px;
+      display: flex !important; align-items: center; min-height: 52px;
+      padding: 15px 28px;
       font-size: 12.5px !important; letter-spacing: 0.12em;
       color: rgba(255,255,255,0.82) !important; text-transform: uppercase;
       border-bottom: 1px solid rgba(255,255,255,0.07);
@@ -169,16 +193,21 @@
     #mob-nav .nav-links .nav-phone { display: flex !important; align-items: center; gap: 8px; text-transform: none !important; font-size: 13px !important; }
     #mob-nav .nav-links .nav-cta { display: block !important; margin: 20px 28px 6px; padding: 12px 24px !important; font-size: 12px !important; text-align: center; border-bottom: none !important; border-radius: 5px; }
     #mob-nav .nav-links .nav-donate { display: block !important; margin: 0 28px 20px; padding: 12px 24px !important; font-size: 12px !important; text-align: center; border-bottom: none !important; border-radius: 5px; }
+    #mob-nav .nav-links .nav-cta,
+    #mob-nav .nav-links .nav-donate {
+      white-space: normal; line-height: 1.35;
+      padding: 14px 16px !important; font-size: 11.5px !important;
+    }
     @media (max-width: 1400px) {
       /* Hamburger button */
       .nav-toggle {
         display: flex; flex-direction: column; justify-content: center;
         gap: 5px; background: none; border: none; cursor: pointer;
-        padding: 6px; z-index: 1001;
+        align-items: center; width: 46px; height: 46px; padding: 0; z-index: 1001;
       }
       .nav-toggle span {
         display: block; width: 22px; height: 2px;
-        background: rgba(255,255,255,0.9); border-radius: 2px;
+        background: var(--navy); border-radius: 2px;
         transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease;
         transform-origin: center;
       }
@@ -551,7 +580,7 @@
     .info-item { display: flex; align-items: flex-start; gap: 18px; }
     .info-icon-box {
       width: 46px; height: 46px; border-radius: 10px;
-      background: rgba(240,135,26,0.14);
+      background: rgba(240,135,26,0.14); color: var(--amber);
       display: flex; align-items: center; justify-content: center;
       font-size: 22px; flex-shrink: 0;
     }
@@ -589,16 +618,16 @@
     }
     .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
     .footer-col a {
-      font-size: 14px; color: rgba(255,255,255,0.45); text-decoration: none;
+      font-size: 15px; color: rgba(255,255,255,0.68); text-decoration: none;
       font-family: 'Nunito', sans-serif;
       transition: color 0.2s ease;
     }
-    .footer-col a:hover { color: rgba(255,255,255,0.85); }
+    .footer-col a:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
     .footer-bottom {
       display: flex; justify-content: space-between;
       align-items: center; flex-wrap: wrap; gap: 16px;
     }
-    .footer-copy { font-size: 12.5px; color: rgba(255,255,255,0.25); font-family: 'Nunito', sans-serif; }
+    .footer-copy { font-size: 13.5px; color: rgba(255,255,255,0.58); font-family: 'Nunito', sans-serif; }
     .footer-dots { display: flex; gap: 6px; align-items: center; }
     .footer-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
 
@@ -645,6 +674,11 @@
     }
     @media (max-width: 480px) {
       .cta-btns { flex-direction: column; align-items: center; }
+    }
+
+    /* Body copy stays >= 16px on phones (accessibility pass) */
+    @media (max-width: 768px) {
+      .svc-card p { font-size: 16px; line-height: 1.65; }
     }
 
     /* ─── GOOGLE TRANSLATE ───────────────────────── */
@@ -696,6 +730,9 @@
 
     /* Mobile — hide translate in the drawer (widget can't duplicate) */
     #mob-nav .nav-translate-item { display: none !important; }
+
+    body > .VIpgJd-ZVi9od-aZ2wEe-wOHMyf,
+    body > .skiptranslate { display: none !important; }
   </style>
 </head>
 <body>
@@ -703,6 +740,8 @@
   <!-- ══════════════════════════════════════════════
        NAV
   ══════════════════════════════════════════════ -->
+  <a class="skip-link" href="#main">Skip to main content</a>
+
   <nav id="main-nav" aria-label="Main navigation">
     <a href="index.html" aria-label="Hope Family Care Center home" class="nav-brand">
       <img src="./assets/Logo1tp.gif" alt="Hope Family Care Center" class="nav-logo">
@@ -713,8 +752,8 @@
     </button>
     <ul class="nav-links">
       <li><a href="about.html">About</a></li>
-      <li><a href="team.html">Team</a></li>
       <li><a href="services.html" class="active">Services</a></li>
+      <li><a href="team.html">Team</a></li>
       <li><a href="volunteer.html">Volunteer</a></li>
       <li><a href="index.html#contact">Contact</a></li>
       <li class="nav-translate-item">
@@ -722,7 +761,7 @@
       </li>
       <li><a href="tel:+18168616500" class="nav-phone" aria-label="Call us at (816) 861-6500"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 012 2.18 2 2 0 013.17 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>(816) 861-6500</a></li>
       <li><a href="donate.html" class="nav-donate">Donate</a></li>
-      <li><a href="https://healow.com/apps/practice/hope-family-care-center-5775?v=2&locale=en" target="_blank" rel="noopener noreferrer" class="nav-cta">Schedule Visit</a></li>
+      <li><a href="https://healow.com/apps/practice/hope-family-care-center-5775?v=2&locale=en" target="_blank" rel="noopener noreferrer" class="nav-cta">Schedule an Appointment<span class="sr-only"> (opens in a new tab on healow.com)</span></a></li>
     </ul>
   </nav>
   <div id="mob-nav" aria-hidden="true"></div>
@@ -730,7 +769,7 @@
   <!-- ══════════════════════════════════════════════
        PAGE HERO
   ══════════════════════════════════════════════ -->
-  <section class="page-hero grain" aria-label="Patient Services">
+  <section id="main" tabindex="-1" class="page-hero grain" aria-label="Patient Services">
     <svg class="page-hero-arc" viewBox="0 0 500 500" fill="none" aria-hidden="true">
       <path d="M 480 480 Q 480 50 50 50" stroke="#F0871A" stroke-width="28" fill="none" stroke-linecap="round"/>
       <path d="M 480 480 Q 480 100 100 100" stroke="#9B2020" stroke-width="24" fill="none" stroke-linecap="round"/>
@@ -817,13 +856,13 @@
           <span class="svc-card-link">Learn More</span>
         </div>
 
-        <!-- 4. Urgent Care -->
-        <div class="svc-card fade-up d3" role="button" tabindex="0" aria-label="Urgent Care — Learn more" onclick="openModal('urgent')" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('urgent')">
+        <!-- 4. Same-Day Care -->
+        <div class="svc-card fade-up d3" role="button" tabindex="0" aria-label="Same-Day Care — Learn more" onclick="openModal('urgent')" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('urgent')">
           <div class="svc-icon-wrap" style="background:rgba(200,104,10,0.11);">
             <svg viewBox="0 0 24 24" stroke="#C8680A" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
           </div>
-          <h3>Urgent Care</h3>
-          <p>Same-day care for non-emergency illnesses and injuries when you can't wait for a scheduled appointment.</p>
+          <h3>Same-Day Care</h3>
+          <p>Same-day appointments for non-emergency illness and injury, plus walk-ins during clinic hours, when you can't wait for a scheduled visit.</p>
           <span class="svc-card-link">Learn More</span>
         </div>
 
@@ -924,21 +963,21 @@
     <div class="container">
       <div class="info-grid">
         <div class="info-item fade-up">
-          <div class="info-icon-box" aria-hidden="true">📍</div>
+          <div class="info-icon-box" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
           <div>
             <div class="info-label">Location</div>
             <div class="info-value">3027 Prospect Avenue<br>Kansas City, MO 64128</div>
           </div>
         </div>
         <div class="info-item fade-up d1">
-          <div class="info-icon-box" aria-hidden="true">🕐</div>
+          <div class="info-icon-box" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 2"/></svg></div>
           <div>
             <div class="info-label">Hours</div>
             <div class="info-value">Monday – Friday<br>8:00 AM – 5:00 PM</div>
           </div>
         </div>
         <div class="info-item fade-up d2">
-          <div class="info-icon-box" aria-hidden="true">🌐</div>
+          <div class="info-icon-box" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a13 13 0 0 1 0 18 13 13 0 0 1 0-18z"/></svg></div>
           <div>
             <div class="info-label">Languages</div>
             <div class="info-value">English &amp; Spanish spoken.<br>All are welcome here.</div>
@@ -981,7 +1020,7 @@
         </nav>
       </div>
       <div class="footer-bottom">
-        <p class="footer-copy">© 2026 Hope Family Care Center. All rights reserved. Kansas City, MO · Serving 24 Zip Codes.</p>
+        <p class="footer-copy">© 2026 Hope Family Care Center. All rights reserved. Kansas City, MO · Serving 50+ ZIP codes.</p>
         <div class="footer-dots" aria-hidden="true">
           <span class="footer-dot" style="background:#F0871A;"></span>
           <span class="footer-dot" style="background:#9B2020;"></span>
@@ -1032,10 +1071,10 @@
       urgent: {
         iconBg: 'rgba(200,104,10,0.11)',
         icon: '<svg viewBox="0 0 24 24" stroke="#C8680A" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
-        title: 'Urgent Care',
+        title: 'Same-Day Care',
         tagline: "Same-day care when you can't wait.",
-        body: "Life doesn't always follow a schedule. When illness or injury strikes and your regular doctor isn't available, our urgent care services are here to help — fast, friendly, and thorough.",
-        features: ['Same-Day Appointments','Minor Injuries & Cuts','Infections & Illnesses','Fever & Flu','Sprains & Strains','Rapid Diagnostic Tests'],
+        body: "Life doesn't always follow a schedule. When illness or injury strikes, we hold same-day appointments during clinic hours so you can be seen by a provider who knows you. Appointments are encouraged, but walk-in patients are welcome Monday–Friday during clinic hours. For life-threatening emergencies, call 911.",
+        features: ['Same-Day Appointments','Walk-Ins Welcome','Minor Injuries & Cuts','Infections & Illnesses','Fever & Flu','Rapid Diagnostic Tests'],
       },
       derm: {
         iconBg: 'rgba(74,45,122,0.11)',

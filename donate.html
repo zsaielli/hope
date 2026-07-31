@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Donate — Hope Family Care Center</title>
+  <link rel="icon" type="image/gif" href="./assets/Logo1tp.gif">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -51,6 +52,24 @@
       z-index: 10;
     }
 
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+    }
+    .skip-link {
+      position: absolute; left: 12px; top: -60px; z-index: 300;
+      background: var(--navy); color: #fff;
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px; font-weight: 800; letter-spacing: 0.04em;
+      padding: 12px 20px; border-radius: 0 0 6px 6px; text-decoration: none;
+      transition: top 0.2s ease;
+    }
+    .skip-link:focus { top: 0; }
+    [tabindex="-1"]:focus { outline: none; }
+    .nav-toggle:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; border-radius: 4px; }
+    .mob-close:focus-visible { outline: 2px solid var(--amber); outline-offset: -2px; border-radius: 6px; }
+
     /* ─── NAV ────────────────────────────────────── */
     #main-nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
@@ -65,11 +84,12 @@
     .nav-logo { height: 48px; }
     .nav-brand { display: flex; align-items: center; gap: 10px; }
     .nav-hope-text { height: 46px; align-self: center; }
-    .nav-links { display: flex; gap: 26px; list-style: none; align-items: center; }
+    .nav-links { display: flex; gap: 20px; list-style: none; align-items: center; }
     .nav-links a {
       white-space: nowrap;
-      font-size: 12.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
       color: rgba(26,26,26,0.72); text-decoration: none;
+      display: inline-flex; align-items: center; min-height: 40px;
       transition: color 0.2s ease;
     }
     .nav-links a:hover { color: var(--amber); }
@@ -78,7 +98,7 @@
 
     .nav-cta {
       background: var(--amber) !important; color: #fff !important;
-      padding: 9px 20px; border-radius: 5px; font-weight: 800 !important; font-size: 12.5px !important;
+      padding: 9px 18px; border-radius: 5px; font-weight: 800 !important; font-size: 12px !important; letter-spacing: 0.07em !important;
       box-shadow: 0 2px 12px rgba(240,135,26,0.35);
       transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease !important;
     }
@@ -102,7 +122,7 @@
     /* Donate kept quiet — patient actions (Schedule) are the loud CTA, not fundraising */
     .nav-donate {
       background: transparent !important; color: var(--red) !important;
-      padding: 7.5px 16px !important; border-radius: 5px; font-weight: 700 !important;
+      padding: 7.5px 15px !important; font-size: 12px !important; border-radius: 5px; font-weight: 700 !important;
       letter-spacing: 0.06em !important; border: 1.5px solid rgba(155,32,32,0.32);
       transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease !important;
     }
@@ -136,8 +156,10 @@
     }
     body.nav-open .mob-panel { transform: translateX(0); }
     .mob-close {
-      position: absolute; top: 18px; right: 18px;
-      background: none; border: none; cursor: pointer; padding: 8px;
+      position: absolute; top: 12px; right: 12px;
+      width: 46px; height: 46px;
+      display: flex; align-items: center; justify-content: center;
+      background: none; border: none; cursor: pointer; padding: 0;
       color: rgba(255,255,255,0.7); line-height: 1;
       transition: color 0.2s ease;
     }
@@ -148,7 +170,8 @@
     }
     #mob-nav .nav-links li { width: 100%; }
     #mob-nav .nav-links li a {
-      display: block !important; padding: 15px 28px;
+      display: flex !important; align-items: center; min-height: 52px;
+      padding: 15px 28px;
       font-size: 12.5px !important; letter-spacing: 0.12em;
       color: rgba(255,255,255,0.82) !important; text-transform: uppercase;
       border-bottom: 1px solid rgba(255,255,255,0.07);
@@ -158,16 +181,21 @@
     #mob-nav .nav-links .nav-phone { display: flex !important; align-items: center; gap: 8px; text-transform: none !important; font-size: 13px !important; }
     #mob-nav .nav-links .nav-cta { display: block !important; margin: 20px 28px 6px; padding: 12px 24px !important; font-size: 12px !important; text-align: center; border-bottom: none !important; border-radius: 5px; }
     #mob-nav .nav-links .nav-donate { display: block !important; margin: 0 28px 20px; padding: 12px 24px !important; font-size: 12px !important; text-align: center; border-bottom: none !important; border-radius: 5px; }
+    #mob-nav .nav-links .nav-cta,
+    #mob-nav .nav-links .nav-donate {
+      white-space: normal; line-height: 1.35;
+      padding: 14px 16px !important; font-size: 11.5px !important;
+    }
     @media (max-width: 1400px) {
       /* Hamburger button */
       .nav-toggle {
         display: flex; flex-direction: column; justify-content: center;
         gap: 5px; background: none; border: none; cursor: pointer;
-        padding: 6px; z-index: 1001;
+        align-items: center; width: 46px; height: 46px; padding: 0; z-index: 1001;
       }
       .nav-toggle span {
         display: block; width: 22px; height: 2px;
-        background: rgba(255,255,255,0.9); border-radius: 2px;
+        background: var(--navy); border-radius: 2px;
         transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease;
         transform-origin: center;
       }
@@ -257,7 +285,7 @@
     }
     .impact-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 22px;
     }
     .impact-card {
@@ -334,75 +362,16 @@
       margin-bottom: 28px; font-family: 'Nunito', sans-serif;
     }
 
-    /* Frequency tabs */
-    .freq-tabs { display: flex; gap: 8px; margin-bottom: 24px; }
-    .freq-tab {
-      flex: 1; padding: 9px 12px;
-      border-radius: 7px; border: 2px solid rgba(74,63,53,0.14);
-      background: transparent; cursor: pointer;
-      font-family: 'Nunito', sans-serif;
-      font-size: 13px; font-weight: 700;
-      color: var(--text-body);
-      transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
-    }
-    .freq-tab:hover { border-color: var(--red); color: var(--red); }
-    .freq-tab.active {
-      background: var(--navy); border-color: var(--navy); color: #fff;
-    }
-    .freq-tab:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
-
-    /* Amount grid */
-    .amount-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 8px; margin-bottom: 10px;
-    }
-    .amount-btn {
-      border: 2px solid rgba(74,63,53,0.14);
-      background: transparent; border-radius: 9px;
-      padding: 12px 8px;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 22px; font-weight: 700;
-      color: var(--navy); cursor: pointer;
-      transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease, transform 0.15s ease;
-    }
-    .amount-btn:hover { border-color: var(--red); color: var(--red); transform: translateY(-2px); }
-    .amount-btn.active {
-      background: var(--red); border-color: var(--red); color: #fff;
-    }
-    .amount-btn:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
-
-    /* Custom amount */
-    .custom-amount-wrap {
-      position: relative; margin-bottom: 22px;
-      display: none;
-    }
-    .custom-amount-wrap.visible { display: block; }
-    .custom-prefix {
-      position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 22px; font-weight: 600; color: #9E9189;
-      pointer-events: none;
-    }
-    .custom-amount-input {
-      width: 100%; border: 2px solid rgba(74,63,53,0.14);
-      border-radius: 9px; padding: 12px 16px 12px 30px;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 22px; font-weight: 700;
-      color: var(--navy); outline: none;
-      transition: border-color 0.2s ease;
-    }
-    .custom-amount-input:focus { border-color: var(--red); }
-    .custom-amount-input::placeholder { color: #C9BFB6; font-weight: 400; }
-
-    /* Donate submit */
+    /* Give button — links out to the secure OneCause page */
     .donate-submit {
-      width: 100%; margin-top: 20px;
+      width: 100%; margin-top: 4px;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
       background: var(--red); color: #fff;
       border: none; border-radius: 8px;
       padding: 17px 24px;
       font-family: 'Nunito', sans-serif;
       font-size: 15px; font-weight: 800; letter-spacing: 0.05em;
-      cursor: pointer;
+      text-decoration: none; cursor: pointer;
       box-shadow: 0 4px 24px rgba(155,32,32,0.3);
       transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
     }
@@ -411,17 +380,47 @@
       box-shadow: 0 8px 32px rgba(155,32,32,0.4);
     }
     .donate-submit:active { transform: translateY(0); }
-    .donate-submit:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+    .donate-submit:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
+
+    /* Shown until ONECAUSE_URL is set — never a link that goes nowhere */
+    .donate-pending {
+      background: rgba(240,135,26,0.1);
+      border: 1px solid rgba(200,104,10,0.28);
+      border-radius: 10px;
+      padding: 16px 18px;
+      font-size: 15px; line-height: 1.65; color: var(--text-body);
+    }
+    .donate-pending strong { color: var(--navy); display: block; margin-bottom: 4px; }
 
     /* Secure note */
     .secure-note {
-      display: flex; align-items: center; justify-content: center; gap: 6px;
-      margin-top: 14px;
-      font-size: 12px; color: #9E9189;
+      display: flex; align-items: flex-start; gap: 8px;
+      margin-top: 16px;
+      font-size: 13px; line-height: 1.55; color: #7C6F66;
       font-family: 'Nunito', sans-serif;
     }
-    .secure-note svg { flex-shrink: 0; color: #9E9189; }
+    .secure-note svg { flex-shrink: 0; color: #9E9189; margin-top: 2px; }
 
+    /* Give-by-phone fallback */
+    .donate-alt {
+      margin-top: 22px; padding-top: 20px;
+      border-top: 1px solid rgba(74,63,53,0.12);
+    }
+    .donate-alt-head {
+      font-family: 'Nunito', sans-serif;
+      font-size: 10.5px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--amber-dark); margin-bottom: 8px;
+    }
+    .donate-alt-link {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 27px; font-weight: 700; color: var(--navy);
+      text-decoration: none; min-height: 44px;
+      transition: color 0.2s ease;
+    }
+    .donate-alt-link:hover { color: var(--red); }
+    .donate-alt-link:focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; border-radius: 3px; }
+    .donate-alt-note { font-size: 14.5px; color: var(--text-body); margin-top: 2px; }
     /* ─── HOW IT HELPS ───────────────────────────── */
     .section-how {
       background: var(--navy);
@@ -456,8 +455,9 @@
     }
     .how-icon {
       width: 54px; height: 54px; border-radius: 13px;
+      background: rgba(240,135,26,0.16); color: var(--amber);
       display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; font-size: 26px;
+      flex-shrink: 0;
     }
     .how-card h3 {
       font-size: 22px; font-weight: 700;
@@ -563,7 +563,7 @@
     .info-item { display: flex; align-items: flex-start; gap: 18px; }
     .info-icon-box {
       width: 46px; height: 46px; border-radius: 10px;
-      background: rgba(240,135,26,0.14);
+      background: rgba(240,135,26,0.14); color: var(--amber);
       display: flex; align-items: center; justify-content: center;
       font-size: 22px; flex-shrink: 0;
     }
@@ -601,16 +601,16 @@
     }
     .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
     .footer-col a {
-      font-size: 14px; color: rgba(255,255,255,0.45); text-decoration: none;
+      font-size: 15px; color: rgba(255,255,255,0.68); text-decoration: none;
       font-family: 'Nunito', sans-serif;
       transition: color 0.2s ease;
     }
-    .footer-col a:hover { color: rgba(255,255,255,0.85); }
+    .footer-col a:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
     .footer-bottom {
       display: flex; justify-content: space-between;
       align-items: center; flex-wrap: wrap; gap: 16px;
     }
-    .footer-copy { font-size: 12.5px; color: rgba(255,255,255,0.25); font-family: 'Nunito', sans-serif; }
+    .footer-copy { font-size: 13.5px; color: rgba(255,255,255,0.58); font-family: 'Nunito', sans-serif; }
     .footer-dots { display: flex; gap: 6px; align-items: center; }
     .footer-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
 
@@ -658,7 +658,13 @@
     @media (max-width: 560px) {
       .impact-grid { grid-template-columns: 1fr; }
       .how-grid { grid-template-columns: 1fr; }
-      .amount-grid { grid-template-columns: repeat(2, 1fr); }
+      .donate-alt-link { font-size: 24px; }
+    }
+
+    /* Body copy stays >= 16px on phones (accessibility pass) */
+    @media (max-width: 768px) {
+      .impact-list li, .donate-card-sub, .donate-pending, .donate-alt-note,
+      .how-card p { font-size: 16px; line-height: 1.6; }
     }
 
     /* ─── GOOGLE TRANSLATE ───────────────────────── */
@@ -710,6 +716,9 @@
 
     /* Mobile — hide translate in the drawer (widget can't duplicate) */
     #mob-nav .nav-translate-item { display: none !important; }
+
+    body > .VIpgJd-ZVi9od-aZ2wEe-wOHMyf,
+    body > .skiptranslate { display: none !important; }
   </style>
 </head>
 <body>
@@ -717,6 +726,8 @@
   <!-- ══════════════════════════════════════════════
        NAV
   ══════════════════════════════════════════════ -->
+  <a class="skip-link" href="#main">Skip to main content</a>
+
   <nav id="main-nav" aria-label="Main navigation">
     <a href="index.html" aria-label="Hope Family Care Center home" class="nav-brand">
       <img src="./assets/Logo1tp.gif" alt="Hope Family Care Center" class="nav-logo">
@@ -727,8 +738,8 @@
     </button>
     <ul class="nav-links">
       <li><a href="about.html">About</a></li>
-      <li><a href="team.html">Team</a></li>
       <li><a href="services.html">Services</a></li>
+      <li><a href="team.html">Team</a></li>
       <li><a href="volunteer.html">Volunteer</a></li>
       <li><a href="index.html#contact">Contact</a></li>
       <li class="nav-translate-item">
@@ -736,7 +747,7 @@
       </li>
       <li><a href="tel:+18168616500" class="nav-phone" aria-label="Call us at (816) 861-6500"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 012 2.18 2 2 0 013.17 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>(816) 861-6500</a></li>
       <li><a href="donate.html" class="nav-donate active">Donate</a></li>
-      <li><a href="https://healow.com/apps/practice/hope-family-care-center-5775?v=2&locale=en" target="_blank" rel="noopener noreferrer" class="nav-cta">Schedule Visit</a></li>
+      <li><a href="https://healow.com/apps/practice/hope-family-care-center-5775?v=2&locale=en" target="_blank" rel="noopener noreferrer" class="nav-cta">Schedule an Appointment<span class="sr-only"> (opens in a new tab on healow.com)</span></a></li>
     </ul>
   </nav>
   <div id="mob-nav" aria-hidden="true"></div>
@@ -744,7 +755,7 @@
   <!-- ══════════════════════════════════════════════
        PAGE HERO
   ══════════════════════════════════════════════ -->
-  <section class="page-hero grain" aria-label="Donate">
+  <section id="main" tabindex="-1" class="page-hero grain" aria-label="Donate">
     <svg class="page-hero-arc" viewBox="0 0 600 600" fill="none" aria-hidden="true">
       <circle cx="300" cy="300" r="240" stroke="white" stroke-width="1.5"/>
       <circle cx="300" cy="300" r="180" stroke="white" stroke-width="1"/>
@@ -777,20 +788,16 @@
     <div class="container">
       <div class="impact-grid">
         <div class="impact-card fade-up">
-          <div class="impact-number">15,000+</div>
-          <div class="impact-label">Patients served each year</div>
+          <div class="impact-number">50+</div>
+          <div class="impact-label">ZIP codes across Kansas City where our patients live</div>
         </div>
         <div class="impact-card fade-up d1">
-          <div class="impact-number">50+</div>
-          <div class="impact-label">Zip codes served across Kansas City</div>
+          <div class="impact-number">1998</div>
+          <div class="impact-label">Our first year serving Kansas City's east side</div>
         </div>
         <div class="impact-card fade-up d2">
-          <div class="impact-number">30+</div>
-          <div class="impact-label">Years of serving our community</div>
-        </div>
-        <div class="impact-card fade-up d3">
-          <div class="impact-number">$0</div>
-          <div class="impact-label">Cost to patients who cannot afford care</div>
+          <div class="impact-number">2025</div>
+          <div class="impact-label">Most recent federal Certification of Compliance</div>
         </div>
       </div>
     </div>
@@ -808,7 +815,7 @@
           <div class="section-eyebrow fade-up">Why It Matters</div>
           <h2 class="section-title fade-up d1">Your Support<br><em>Changes Lives</em></h2>
           <p class="fade-up d2">
-            Hope Family Care Center has been a cornerstone of health in Kansas City for decades. We serve patients who are uninsured, underinsured, and underserved — offering primary care, behavioral health, women's health, and more.
+            Hope Family Care Center has been a cornerstone of health on Kansas City's east side. We serve patients who are uninsured, underinsured, and underserved — offering primary care, pediatrics, women's health, same-day care, and on-site lab work.
           </p>
           <p class="fade-up d2">
             Your donation helps ensure that cost is never a barrier to getting the care a family needs.
@@ -818,19 +825,19 @@
               <span class="impact-check">
                 <svg viewBox="0 0 14 14" fill="none" stroke="#9B2020" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2 7 5.5 10.5 12 3.5"/></svg>
               </span>
-              <span><strong>$25</strong> covers a well-child visit for a child with no insurance</span>
+              <span><strong>Access</strong> — helps a family see a provider when they have no insurance</span>
             </li>
             <li class="fade-up d3">
               <span class="impact-check">
                 <svg viewBox="0 0 14 14" fill="none" stroke="#9B2020" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2 7 5.5 10.5 12 3.5"/></svg>
               </span>
-              <span><strong>$50</strong> provides diabetes management support for an uninsured adult</span>
+              <span><strong>Ongoing care</strong> — supports neighbors managing diabetes, blood pressure, and asthma</span>
             </li>
             <li class="fade-up d3">
               <span class="impact-check">
                 <svg viewBox="0 0 14 14" fill="none" stroke="#9B2020" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2 7 5.5 10.5 12 3.5"/></svg>
               </span>
-              <span><strong>$100</strong> funds a behavioral health session for a family in crisis</span>
+              <span><strong>Affordability</strong> — keeps sliding-scale fees within reach for patients who cannot pay full price</span>
             </li>
             <li class="fade-up d3">
               <span class="impact-check">
@@ -841,47 +848,40 @@
           </ul>
         </div>
 
-        <!-- Donation Card -->
-        <div class="donate-card fade-up d2" aria-label="Donation form">
-          <h3 class="donate-card-title">Make a Donation</h3>
-          <p class="donate-card-sub">Every dollar goes directly to patient care.</p>
+        <!-- Giving card — hands off to HOPE's secure OneCause page.
+             The "unavailable" state below is what renders until
+             ONECAUSE_URL is set in the script at the bottom of this file. -->
+        <div class="donate-card fade-up d2">
+          <h3 class="donate-card-title">Give Securely</h3>
+          <p class="donate-card-sub">Choose a one-time or monthly amount on HOPE's secure giving page.</p>
 
-          <div class="freq-tabs" role="group" aria-label="Donation frequency">
-            <button class="freq-tab active" id="tab-onetime" onclick="setFreq(this,'one-time')" aria-pressed="true">One-Time</button>
-            <button class="freq-tab" id="tab-monthly" onclick="setFreq(this,'monthly')" aria-pressed="false">Monthly</button>
-          </div>
+          <a class="donate-submit" id="giveBtn" hidden
+             target="_blank" rel="noopener noreferrer">
+            Give through OneCause
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+            <span class="sr-only"> (opens in a new tab on OneCause)</span>
+          </a>
 
-          <div class="amount-grid" id="amountGrid" role="group" aria-label="Donation amounts">
-            <button class="amount-btn" onclick="selectAmount(this,25)">$25</button>
-            <button class="amount-btn active" onclick="selectAmount(this,50)">$50</button>
-            <button class="amount-btn" onclick="selectAmount(this,100)">$100</button>
-            <button class="amount-btn" onclick="selectAmount(this,250)">$250</button>
-            <button class="amount-btn" onclick="selectAmount(this,500)">$500</button>
-            <button class="amount-btn" onclick="selectAmount(this,null)">Other</button>
-          </div>
+          <p class="donate-pending" id="givePending" role="status">
+            <strong>Online giving is being connected.</strong>
+            HOPE's secure OneCause giving page is not linked here yet. Until it is, please give by phone — every gift still goes straight to patient care.
+          </p>
 
-          <div class="custom-amount-wrap" id="customAmountWrap">
-            <span class="custom-prefix">$</span>
-            <input
-              type="number"
-              id="customAmount"
-              class="custom-amount-input"
-              placeholder="Enter amount"
-              min="1"
-              aria-label="Custom donation amount"
-            />
-          </div>
-
-          <button class="donate-submit" id="donateBtn" onclick="handleDonate()">
-            Donate $50 Now
-          </button>
-
-          <div class="secure-note" aria-label="Secure donation">
+          <div class="secure-note">
             <svg width="14" height="15" viewBox="0 0 14 16" fill="none" aria-hidden="true">
               <path d="M7 1L1 3.5V8c0 3.31 2.56 6.41 6 7 3.44-.59 6-3.69 6-7V3.5L7 1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
               <path d="M4.5 8l1.5 1.5L9 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            Secure, encrypted donation
+            Secure donation processing is provided by OneCause. You leave hfcckc.org to complete your gift.
+          </div>
+
+          <div class="donate-alt">
+            <div class="donate-alt-head">Give by phone</div>
+            <a class="donate-alt-link" href="tel:+18168616500">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 012 2.18 2 2 0 013.17 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+              (816) 861-6500
+            </a>
+            <p class="donate-alt-note">Monday – Friday, 8:00 AM – 5:00 PM</p>
           </div>
         </div>
 
@@ -901,7 +901,7 @@
   <!-- ══════════════════════════════════════════════
        WHERE YOUR GIFT GOES
   ══════════════════════════════════════════════ -->
-  <section class="section-how" aria-label="Where your gift goes">
+  <section class="section-how" id="impact" aria-labelledby="impact-heading">
     <svg class="how-bg-arc" viewBox="0 0 700 700" fill="none" aria-hidden="true">
       <circle cx="350" cy="350" r="280" stroke="white" stroke-width="1.5"/>
       <circle cx="350" cy="350" r="200" stroke="white" stroke-width="1"/>
@@ -909,34 +909,34 @@
     </svg>
     <div class="container">
       <div class="section-eyebrow fade-up">Your Impact</div>
-      <h2 class="section-title fade-up d1">Where Your Gift Goes</h2>
+      <h2 class="section-title fade-up d1" id="impact-heading">Where Your Gift Goes</h2>
       <div class="how-grid">
         <div class="how-card fade-up d1">
-          <div class="how-icon" style="background:rgba(42,122,42,0.15);">🩺</div>
+          <div class="how-icon"><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
           <div>
             <h3>Primary Care</h3>
-            <p>Preventive checkups, chronic disease management, and urgent care for adults and children — regardless of insurance status.</p>
+            <p>Preventive checkups, chronic disease management, and same-day care for adults and children — regardless of insurance status.</p>
           </div>
         </div>
         <div class="how-card fade-up d2">
-          <div class="how-icon" style="background:rgba(30,79,163,0.15);">🧠</div>
+          <div class="how-icon"><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
           <div>
-            <h3>Behavioral Health</h3>
-            <p>Mental health counseling, substance use support, and crisis intervention for individuals and families in need.</p>
+            <h3>Social &amp; Community Support</h3>
+            <p>Our social work team helps patients apply for benefits and connect with food, housing, transportation, and language services.</p>
           </div>
         </div>
         <div class="how-card fade-up d3">
-          <div class="how-icon" style="background:rgba(155,32,32,0.12);">👶</div>
+          <div class="how-icon"><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="5"/><path d="M12 13v8M9 18h6"/></svg></div>
           <div>
             <h3>Women &amp; Children</h3>
             <p>Prenatal care, well-child visits, and women's health services that keep Kansas City families healthy from the start.</p>
           </div>
         </div>
         <div class="how-card fade-up d4">
-          <div class="how-icon" style="background:rgba(74,45,122,0.15);">💊</div>
+          <div class="how-icon"><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v11m0 0H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-4m-6 0h6"/></svg></div>
           <div>
-            <h3>Pharmacy &amp; Medications</h3>
-            <p>Affordable prescription access so patients can afford the medications their doctors prescribe.</p>
+            <h3>Appointment &amp; Medication Support</h3>
+            <p>Help keeping appointments and staying on prescribed medications, so a treatment plan actually works.</p>
           </div>
         </div>
       </div>
@@ -953,17 +953,11 @@
   </div>
 
   <!-- ══════════════════════════════════════════════
-       QUOTE
+       PATIENT TESTIMONIAL — REMOVED PENDING APPROVAL
+       The quote previously here had no verifiable source. Restore it, or an
+       approved replacement, into a <section class="section-quote"> block; the
+       styles are still defined above. Prior markup: git show HEAD:donate.html
   ══════════════════════════════════════════════ -->
-  <section class="section-quote" aria-label="Patient testimonial">
-    <div class="container">
-      <span class="quote-mark fade-up" aria-hidden="true">"</span>
-      <blockquote class="fade-up d1">
-        Hope Family Care Center gave my family somewhere to turn when we had no one else. Their care changed our lives.
-      </blockquote>
-      <cite class="fade-up d2">— A Hope Family Care Center Patient</cite>
-    </div>
-  </section>
 
   <!-- ══════════════════════════════════════════════
        CTA
@@ -999,14 +993,14 @@
     <div class="container">
       <div class="info-grid">
         <div class="info-item fade-up">
-          <div class="info-icon-box" aria-hidden="true">📍</div>
+          <div class="info-icon-box" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
           <div>
             <div class="info-label">Location</div>
             <div class="info-value">3027 Prospect Avenue<br>Kansas City, MO 64128</div>
           </div>
         </div>
         <div class="info-item fade-up d1">
-          <div class="info-icon-box" aria-hidden="true">🕐</div>
+          <div class="info-icon-box" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 2"/></svg></div>
           <div>
             <div class="info-label">Hours</div>
             <div class="info-value">Monday – Friday<br>8:00 AM – 5:00 PM</div>
@@ -1055,7 +1049,7 @@
         </nav>
       </div>
       <div class="footer-bottom">
-        <p class="footer-copy">© 2026 Hope Family Care Center. All rights reserved. Kansas City, MO · Serving 24 Zip Codes.</p>
+        <p class="footer-copy">© 2026 Hope Family Care Center. All rights reserved. Kansas City, MO · Serving 50+ ZIP codes.</p>
         <div class="footer-dots" aria-hidden="true">
           <span class="footer-dot" style="background:#F0871A;"></span>
           <span class="footer-dot" style="background:#9B2020;"></span>
@@ -1068,58 +1062,27 @@
   </footer>
 
   <script>
-    let selectedAmount = 50;
-    let isMonthly = false;
+    /* ─────────────────────────────────────────────────────────────
+       DONATION DESTINATION — the one line to change when HOPE's
+       OneCause giving page is ready.
 
-    function setFreq(btn, type) {
-      document.querySelectorAll('.freq-tab').forEach(b => {
-        b.classList.remove('active');
-        b.setAttribute('aria-pressed', 'false');
-      });
-      btn.classList.add('active');
-      btn.setAttribute('aria-pressed', 'true');
-      isMonthly = (type === 'monthly');
-      updateBtn();
-    }
+         const ONECAUSE_URL = 'https://event.gives/…';   ← paste it here
 
-    function selectAmount(btn, amount) {
-      document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const wrap = document.getElementById('customAmountWrap');
-      if (amount === null) {
-        wrap.classList.add('visible');
-        document.getElementById('customAmount').focus();
-        selectedAmount = null;
-      } else {
-        wrap.classList.remove('visible');
-        selectedAmount = amount;
-      }
-      updateBtn();
-    }
+       While this is null, the page shows the "being connected" notice
+       and the give-by-phone fallback instead of a link to nowhere.
+       Amount selection and receipting happen on OneCause, so nothing
+       on this page needs to collect or transmit payment details.
+       ───────────────────────────────────────────────────────────── */
+    const ONECAUSE_URL = null;
 
-    document.getElementById('customAmount').addEventListener('input', function () {
-      selectedAmount = parseFloat(this.value) || null;
-      updateBtn();
-    });
-
-    function updateBtn() {
-      const btn = document.getElementById('donateBtn');
-      const freq = isMonthly ? '/month' : ' Now';
-      if (selectedAmount) {
-        btn.textContent = 'Donate $' + selectedAmount + freq;
-      } else {
-        btn.textContent = 'Donate Now';
-      }
-    }
-
-    function handleDonate() {
-      const amount = selectedAmount || parseFloat(document.getElementById('customAmount').value);
-      if (!amount || amount < 1) {
-        alert('Please enter a donation amount.');
-        return;
-      }
-      alert('Thank you for your generosity! You\'re being redirected to our secure payment page.');
-    }
+    (function wireGiving() {
+      const btn = document.getElementById('giveBtn');
+      const pending = document.getElementById('givePending');
+      if (!ONECAUSE_URL) return;            // leave the honest default state
+      btn.href = ONECAUSE_URL;
+      btn.hidden = false;
+      pending.hidden = true;
+    })();
 
     // Fade-up intersection observer
     const observer = new IntersectionObserver((entries) => {

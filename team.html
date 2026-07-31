@@ -269,6 +269,63 @@
       max-width: 560px;
     }
 
+    /* ─── FOUNDERS ───────────────────────────────── */
+    .section-founders {
+      background: var(--cream-dark);
+      padding: 112px 80px;
+      border-bottom: 1px solid rgba(200,160,80,0.2);
+      position: relative;
+    }
+    .founders-inner { max-width: 1200px; margin: 0 auto; }
+    .founders-head { margin-bottom: 60px; }
+
+    .founders-body {
+      display: grid; grid-template-columns: 1.4fr 1fr;
+      gap: 56px; align-items: center;
+    }
+    .founders-col { display: grid; gap: 38px; }
+    .founders-lede {
+      font-size: 17px; line-height: 1.8; color: var(--text-body);
+    }
+
+    .founders-portrait {
+      position: relative;
+      border-radius: 12px; overflow: hidden;
+      box-shadow:
+        0 4px 24px rgba(26,26,26,0.08),
+        0 1px 4px rgba(0,0,0,0.04);
+    }
+    .founders-portrait img {
+      width: 100%; display: block;
+      aspect-ratio: 4 / 3;
+      object-fit: cover; object-position: 26% 30%;
+    }
+    .founders-portrait::after {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to top, rgba(26,26,26,0.30) 0%, transparent 46%),
+        linear-gradient(135deg, rgba(240,135,26,0.12) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    /* One shared portrait, so the pair share a single rule instead of two cards */
+    .founders-names {
+      display: grid; gap: 30px;
+      border-left: 3px solid var(--amber);
+      padding-left: 26px;
+    }
+    .founder-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px; font-weight: 600; line-height: 1.1;
+      color: var(--navy); margin-bottom: 6px;
+    }
+    .founder-role {
+      font-family: 'Nunito', sans-serif;
+      font-size: 10.5px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--amber);
+    }
+
     /* ─── EXECUTIVE LEADERSHIP ───────────────────── */
     .section-leadership {
       background: var(--cream);
@@ -523,17 +580,27 @@
     @media (max-width: 1024px) {
       .team-grid-exec { grid-template-columns: repeat(2, 1fr); }
       .team-grid-board { grid-template-columns: repeat(3, 1fr); }
+      .founders-body { grid-template-columns: 1fr; gap: 36px; }
+      /* Side by side, the shared rule would read as Anne's alone — give each its own */
+      .founders-names {
+        grid-template-columns: 1fr 1fr; gap: 32px;
+        border-left: none; padding-left: 0;
+      }
+      .founder { border-left: 3px solid var(--amber); padding-left: 22px; }
     }
     @media (max-width: 768px) {
       .container { padding: 0 28px; }
       .page-hero { padding: 130px 28px 80px; }
-      .section-leadership, .section-board, .section-cta { padding: 72px 28px; }
+      .section-founders, .section-leadership, .section-board, .section-cta { padding: 72px 28px; }
       .team-grid-exec { grid-template-columns: 1fr; }
       .team-grid-board { grid-template-columns: repeat(2, 1fr); }
       .info-grid { grid-template-columns: 1fr; gap: 28px; }
       .footer-top { flex-direction: column; }
       .footer-nav-cols { flex-direction: column; gap: 32px; }
       .section-header { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 560px) {
+      .founders-names { grid-template-columns: 1fr; gap: 26px; }
     }
     @media (max-width: 480px) {
       .team-grid-board { grid-template-columns: 1fr; }
@@ -658,6 +725,41 @@
   </div>
 
   <!-- ══════════════════════════════════════════════
+       OUR FOUNDERS
+  ══════════════════════════════════════════════ -->
+  <section class="section-founders" aria-labelledby="founders-heading">
+    <div class="founders-inner">
+      <div class="founders-head">
+        <div class="section-eyebrow fade-up">Our Founders</div>
+        <h2 class="section-heading fade-up d1" id="founders-heading">
+          Where Hope<br><em>began</em>
+        </h2>
+      </div>
+
+      <div class="founders-body">
+        <div class="founders-portrait fade-up d1">
+          <img src="./assets/Our_Founders.png" alt="Dr. Anne Kettler and Dr. Tom Kettler, founders of Hope Family Care Center">
+        </div>
+        <div class="founders-col fade-up d2">
+          <p class="founders-lede">
+            Hope Family Care Center grew out of a conviction shared by two physicians: that quality primary care belongs to everyone, whatever they can pay.
+          </p>
+          <div class="founders-names">
+            <div class="founder">
+              <div class="founder-name">Dr. Anne Kettler, MD</div>
+              <div class="founder-role">Co-Founder</div>
+            </div>
+            <div class="founder">
+              <div class="founder-name">Dr. Tom Kettler, MD</div>
+              <div class="founder-role">Co-Founder</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
        EXECUTIVE LEADERSHIP
   ══════════════════════════════════════════════ -->
   <section class="section-leadership" aria-labelledby="leadership-heading">
@@ -681,7 +783,7 @@
             <img src="./assets/ericka-saielli.png" alt="Ericka Saielli — Chief Executive Officer">
           </div>
           <div class="team-info">
-            <div class="team-name">Ericka Saielli</div>
+            <div class="team-name">Ericka Saielli, MBA</div>
             <div class="team-role">Chief Executive Officer</div>
           </div>
         </div>
@@ -698,10 +800,10 @@
 
         <div class="team-card team-card-exec fade-up d2">
           <div class="team-photo-wrap">
-            <img src="./assets/michelle-rehnberg.jpeg" alt="Michelle Rehnberg — Director of Operations">
+            <img src="./assets/michelle-rehnberg.jpeg" alt="Michelle Rehnberg — Finance Director">
           </div>
           <div class="team-info">
-            <div class="team-name">Michelle Rehnberg</div>
+            <div class="team-name">Michelle Rehnberg, MSHI, MBA</div>
             <div class="team-role">Finance Director</div>
           </div>
         </div>
@@ -851,10 +953,10 @@
 
         <div class="team-card team-card-board fade-up">
           <div class="team-photo-wrap">
-            <img src="./assets/matthew-farmer.jpg" alt="Matthew Farmer — Board Member">
+            <img src="./assets/Michael-Moncure.png" alt="Michael Moncure, M.D. — Board Member">
           </div>
           <div class="team-info">
-            <div class="team-name">Matthew Farmer</div>
+            <div class="team-name">Michael Moncure, M.D.</div>
             <div class="team-role">Member</div>
           </div>
         </div>

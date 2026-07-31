@@ -14,3 +14,6 @@ Thumbs.db
 # Editor
 .vscode/
 *.swp
+
+# Machine-specific agent settings (paths and permissions are per-developer)
+.claude/settings.local.json

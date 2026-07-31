@@ -1,0 +1,14 @@
+import puppeteer from 'puppeteer';
+const url = process.argv[2];
+const out = process.argv[3];
+const y = parseInt(process.argv[4]||'0');
+const h = parseInt(process.argv[5]||'900');
+const w = parseInt(process.argv[6]||'1440');
+const b = await puppeteer.launch({headless:true,args:['--no-sandbox','--disable-setuid-sandbox','--disable-dev-shm-usage']});
+const p = await b.newPage();
+await p.setViewport({width:w,height:900});
+await p.goto(url,{waitUntil:'networkidle2',timeout:30000});
+await new Promise(r=>setTimeout(r,1500));
+await p.screenshot({path:out,clip:{x:0,y:y,width:w,height:h}});
+await b.close();
+console.log('saved',out);

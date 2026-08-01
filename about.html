@@ -443,23 +443,15 @@
       font-size: 17px; line-height: 1.8; color: var(--text-body);
       margin-bottom: 30px; max-width: 660px;
     }
-    .area-points {
-      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px; margin-bottom: 26px;
+    .zip-grid { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 26px; }
+    .zip-badge {
+      font-family: 'Nunito', sans-serif;
+      font-size: 15px; font-weight: 700; letter-spacing: 0.05em;
+      background: #fff; color: var(--navy);
+      padding: 10px 16px; border-radius: 6px;
+      border: 1px solid rgba(27,62,122,0.14);
+      box-shadow: 0 2px 8px rgba(27,62,122,0.05);
     }
-    .area-point {
-      display: flex; gap: 14px; align-items: flex-start;
-      background: #fff; border: 1px solid rgba(27,62,122,0.1);
-      border-radius: 12px; padding: 20px 22px;
-      box-shadow: 0 4px 18px rgba(27,62,122,0.05);
-    }
-    .area-point-icon {
-      width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      background: rgba(240,135,26,0.12); color: var(--amber-dark);
-    }
-    .area-point p { font-size: 16px; line-height: 1.65; color: var(--text-body); }
-    @media (max-width: 700px) { .area-points { grid-template-columns: 1fr; } }
     .area-note { font-size: 16px; line-height: 1.7; color: var(--text-body); }
     .area-link {
       color: var(--amber-dark); font-weight: 800; text-decoration: none;
@@ -1359,17 +1351,13 @@
         <div class="section-eyebrow fade-up">Who We Serve</div>
         <h2 class="section-title fade-up d1" id="area-heading">Our <em>Service Area</em></h2>
         <p class="area-sub fade-up d2">
-          Our clinic sits on Prospect Avenue, and our patients come to us from more than 50 ZIP codes across Kansas City's east side and the surrounding communities.
+          Our clinic sits on Prospect Avenue, and our patients come to us from 25 ZIP codes across Kansas City's east side and the surrounding communities.
         </p>
-        <div class="area-points fade-up d3">
-          <div class="area-point">
-            <div class="area-point-icon" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-            <p>Kansas City's east side is our home, and the neighborhoods around it are where most of our patients live.</p>
-          </div>
-          <div class="area-point">
-            <div class="area-point-icon" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-            <p>There is no ZIP code test at our front desk. Where you live does not decide whether we will see you.</p>
-          </div>
+        <div class="zip-grid fade-up d3">
+          <span class="zip-badge">64030</span><span class="zip-badge">64052</span><span class="zip-badge">64106</span><span class="zip-badge">64108</span><span class="zip-badge">64109</span><span class="zip-badge">64110</span>
+          <span class="zip-badge">64111</span><span class="zip-badge">64112</span><span class="zip-badge">64121</span><span class="zip-badge">64123</span><span class="zip-badge">64124</span><span class="zip-badge">64126</span>
+          <span class="zip-badge">64127</span><span class="zip-badge">64128</span><span class="zip-badge">64129</span><span class="zip-badge">64130</span><span class="zip-badge">64131</span><span class="zip-badge">64132</span>
+          <span class="zip-badge">64133</span><span class="zip-badge">64137</span><span class="zip-badge">64138</span><span class="zip-badge">64170</span><span class="zip-badge">64197</span><span class="zip-badge">64198</span>
         </div>
         <p class="area-note fade-up d4">
           Not sure whether we can help? Call <a href="tel:+18168616500" class="area-link">(816) 861-6500</a> and our staff will walk through it with you.
@@ -1481,7 +1469,7 @@
       </div>
 
       <div class="footer-bottom">
-        <p class="footer-copy">© 2026 Hope Family Care Center. All rights reserved. Kansas City, MO · Serving 50+ ZIP codes.</p>
+        <p class="footer-copy">© 2026 Hope Family Care Center. All rights reserved. Kansas City, MO · Serving 25 ZIP codes.</p>
         <div class="footer-dots" aria-hidden="true">
           <span class="footer-dot" style="background:#F0871A;"></span>
           <span class="footer-dot" style="background:#9B2020;"></span>

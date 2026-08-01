@@ -1063,17 +1063,14 @@
 
   <script>
     /* ─────────────────────────────────────────────────────────────
-       DONATION DESTINATION — the one line to change when HOPE's
-       OneCause giving page is ready.
+       DONATION DESTINATION — HOPE's live OneCause giving page.
 
-         const ONECAUSE_URL = 'https://event.gives/…';   ← paste it here
-
-       While this is null, the page shows the "being connected" notice
-       and the give-by-phone fallback instead of a link to nowhere.
+       Set to null to fall back to the "being connected" notice and the
+       give-by-phone card instead of showing a link to nowhere.
        Amount selection and receipting happen on OneCause, so nothing
        on this page needs to collect or transmit payment details.
        ───────────────────────────────────────────────────────────── */
-    const ONECAUSE_URL = null;
+    const ONECAUSE_URL = 'https://my.onecause.com/fundraiser/organizations/sf-0013c00001oDc6fAAC/fundraisers/fundraiser:c049572a-60b1-41f8-aba2-416eca2c27ec';
 
     (function wireGiving() {
       const btn = document.getElementById('giveBtn');
